@@ -1,0 +1,271 @@
+﻿@model MVCWebApplication.Models.Card
+
+@{
+    ViewBag.Title = "Edit";
+    ViewBag.Title = "You GO! " + User.Identity.Name;
+    ViewBag.Hole1 = "HOLE 1";
+    ViewBag.Hole2 = "HOLE 2";
+    ViewBag.Hole3 = "HOLE 3";
+    ViewBag.Hole4 = "HOLE 4";
+    ViewBag.Hole5 = "HOLE 5";
+    ViewBag.Hole6 = "HOLE 6";
+    ViewBag.Hole7 = "HOLE 7";
+    ViewBag.Hole8 = "HOLE 8";
+    ViewBag.Hole9 = "HOLE 9";
+    ViewBag.Hole10 = "HOLE 10";
+    ViewBag.Hole11 = "HOLE 11";
+    ViewBag.Hole12 = "HOLE 12";
+    ViewBag.Hole13 = "HOLE 13";
+    ViewBag.Hole14 = "HOLE 14";
+    ViewBag.Hole15 = "HOLE 15";
+    ViewBag.Hole16 = "HOLE 16";
+    ViewBag.Hole17 = "HOLE 17";
+    ViewBag.Hole18 = "HOLE 18";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="card edit">
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div style="visibility: hidden;">
+            @Html.HiddenFor(model => model.Name)
+        </div>
+        <div style="visibility: hidden;">
+            @Html.HiddenFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        @*----------------------------------------------------------------------------------------------------------------------h1*@
+        @if (Model.h1 == 0 && Model.h2 == 0 && Model.h3 == 0 && Model.h4 == 0 && Model.h5 == 0 && Model.h6 == 0 && Model.h7 == 0 && Model.h8 == 0 && Model.h9 == 0 && Model.h10 == 0 && Model.h11 == 0 && Model.h12 == 0 && Model.h13 == 0 && Model.h14 == 0 && Model.h15 == 0 && Model.h16 == 0 && Model.h17 == 0 && Model.h18 == 0)
+        {
+            <div class="card-header">
+                <strong>@ViewBag.Hole1</strong>
+            </div>
+            <div class="card-content">
+                <input name="h1" class="text-box single-line" id="h1" type="tel" data-val-required="The h1 field is required."
+                       data-val="true" data-val-number="The field h1 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h1)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------h2*@
+        else if (Model.h1 != 0 && Model.h2 == 0 && Model.h3 == 0 && Model.h4 == 0 && Model.h5 == 0 && Model.h6 == 0 && Model.h7 == 0 && Model.h8 == 0 && Model.h9 == 0 && Model.h10 == 0 && Model.h11 == 0 && Model.h12 == 0 && Model.h13 == 0 && Model.h14 == 0 && Model.h15 == 0 && Model.h16 == 0 && Model.h17 == 0 && Model.h18 == 0)
+        {
+            <div class="card-header">
+                <strong>@ViewBag.Hole2</strong>
+            </div>
+            <div class="card-content">
+                <input name="h2" class="text-box single-line" id="h2" type="tel" data-val-required="The h2 field is required."
+                       data-val="true" data-val-number="The field h2 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h2)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------h3*@
+        else if (Model.h1 != 0 && Model.h2 != 0 && Model.h3 == 0 && Model.h4 == 0 && Model.h5 == 0 && Model.h6 == 0 && Model.h7 == 0 && Model.h8 == 0 && Model.h9 == 0 && Model.h10 == 0 && Model.h11 == 0 && Model.h12 == 0 && Model.h13 == 0 && Model.h14 == 0 && Model.h15 == 0 && Model.h16 == 0 && Model.h17 == 0 && Model.h18 == 0)
+        {
+            <div class="card-header">
+                <strong>@ViewBag.Hole3</strong>
+            </div>
+            <div class="card-content">
+                <input name="h3" class="text-box single-line" id="h3" type="tel" data-val-required="The h3 field is required."
+                       data-val="true" data-val-number="The field h3 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h3)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------h4*@
+        else if (Model.h1 != 0 && Model.h2 != 0 && Model.h3 != 0 && Model.h4 == 0 && Model.h5 == 0 && Model.h6 == 0 && Model.h7 == 0 && Model.h8 == 0 && Model.h9 == 0 && Model.h10 == 0 && Model.h11 == 0 && Model.h12 == 0 && Model.h13 == 0 && Model.h14 == 0 && Model.h15 == 0 && Model.h16 == 0 && Model.h17 == 0 && Model.h18 == 0)
+        {
+            <div class="card-header">
+                <strong>@ViewBag.Hole4</strong>
+            </div>
+            <div class="card-content">
+                <input name="h4" class="text-box single-line" id="h4" type="tel" data-val-required="The h4 field is required."
+                       data-val="true" data-val-number="The field h4 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h4)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------h5*@
+        else if (Model.h1 != 0 && Model.h2 != 0 && Model.h3 != 0 && Model.h4 != 0 && Model.h5 == 0 && Model.h6 == 0 && Model.h7 == 0 && Model.h8 == 0 && Model.h9 == 0 && Model.h10 == 0 && Model.h11 == 0 && Model.h12 == 0 && Model.h13 == 0 && Model.h14 == 0 && Model.h15 == 0 && Model.h16 == 0 && Model.h17 == 0 && Model.h18 == 0)
+        {
+            <div class="card-header">
+                <strong>@ViewBag.Hole5</strong>
+            </div>
+            <div class="card-content">
+                <input name="h5" class="text-box single-line" id="h5" type="tel" data-val-required="The h5 field is required."
+                       data-val="true" data-val-number="The field h5 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h5)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------h6*@
+        else if (Model.h1 != 0 && Model.h2 != 0 && Model.h3 != 0 && Model.h4 != 0 && Model.h5 != 0 && Model.h6 == 0 && Model.h7 == 0 && Model.h8 == 0 && Model.h9 == 0 && Model.h10 == 0 && Model.h11 == 0 && Model.h12 == 0 && Model.h13 == 0 && Model.h14 == 0 && Model.h15 == 0 && Model.h16 == 0 && Model.h17 == 0 && Model.h18 == 0)
+        {
+            <div class="card-header">
+                <strong>@ViewBag.Hole6</strong>
+            </div>
+            <div class="card-content">
+                <input name="h6" class="text-box single-line" id="h6" type="tel" data-val-required="The h6 field is required."
+                       data-val="true" data-val-number="The field h6 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h6)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------h7*@
+        else if (Model.h1 != 0 && Model.h2 != 0 && Model.h3 != 0 && Model.h4 != 0 && Model.h5 != 0 && Model.h6 != 0 && Model.h7 == 0 && Model.h8 == 0 && Model.h9 == 0 && Model.h10 == 0 && Model.h11 == 0 && Model.h12 == 0 && Model.h13 == 0 && Model.h14 == 0 && Model.h15 == 0 && Model.h16 == 0 && Model.h17 == 0 && Model.h18 == 0)
+        {
+            <div class="card-header">
+                <strong>@ViewBag.Hole7</strong>
+            </div>
+            <div class="card-content">
+                <input name="h7" class="text-box single-line" id="h7" type="tel" data-val-required="The h7 field is required."
+                       data-val="true" data-val-number="The field h7 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h7)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------h8*@
+        else if (Model.h1 != 0 && Model.h2 != 0 && Model.h3 != 0 && Model.h4 != 0 && Model.h5 != 0 && Model.h6 != 0 && Model.h7 != 0 && Model.h8 == 0 && Model.h9 == 0 && Model.h10 == 0 && Model.h11 == 0 && Model.h12 == 0 && Model.h13 == 0 && Model.h14 == 0 && Model.h15 == 0 && Model.h16 == 0 && Model.h17 == 0 && Model.h18 == 0)
+        {
+            <div class="card-header">
+                <strong>@ViewBag.Hole8</strong>
+            </div>
+            <div class="card-content">
+                <input name="h8" class="text-box single-line" id="h8" type="tel" data-val-required="The h8 field is required."
+                       data-val="true" data-val-number="The field h8 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h8)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------h9*@
+        else if (Model.h1 != 0 && Model.h2 != 0 && Model.h3 != 0 && Model.h4 != 0 && Model.h5 != 0 && Model.h6 != 0 && Model.h7 != 0 && Model.h8 != 0 && Model.h9 == 0 && Model.h10 == 0 && Model.h11 == 0 && Model.h12 == 0 && Model.h13 == 0 && Model.h14 == 0 && Model.h15 == 0 && Model.h16 == 0 && Model.h17 == 0 && Model.h18 == 0)
+        {
+            <div class="card-header">
+                <strong>@ViewBag.Hole9</strong>
+            </div>
+            <div class="card-content">
+                <input name="h9" class="text-box single-line" id="h9" type="tel" data-val-required="The h9 field is required."
+                       data-val="true" data-val-number="The field h9 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h9)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------h10*@
+        else if (Model.h1 != 0 && Model.h2 != 0 && Model.h3 != 0 && Model.h4 != 0 && Model.h5 != 0 && Model.h6 != 0 && Model.h7 != 0 && Model.h8 != 0 && Model.h9 != 0 && Model.h10 == 0 && Model.h11 == 0 && Model.h12 == 0 && Model.h13 == 0 && Model.h14 == 0 && Model.h15 == 0 && Model.h16 == 0 && Model.h17 == 0 && Model.h18 == 0)
+        {
+            <div class="card-header">
+                <strong>@ViewBag.Hole10</strong>
+            </div>
+            <div class="card-content">
+                <input name="h10" class="text-box single-line" id="h10" type="tel" data-val-required="The h10 field is required."
+                       data-val="true" data-val-number="The field h10 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h10)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------h11*@
+        else if (Model.h1 != 0 && Model.h2 != 0 && Model.h3 != 0 && Model.h4 != 0 && Model.h5 != 0 && Model.h6 != 0 && Model.h7 != 0 && Model.h8 != 0 && Model.h9 != 0 && Model.h10 != 0 && Model.h11 == 0 && Model.h12 == 0 && Model.h13 == 0 && Model.h14 == 0 && Model.h15 == 0 && Model.h16 == 0 && Model.h17 == 0 && Model.h18 == 0)
+        {
+            <div class="card-header">
+                <strong>@ViewBag.Hole11</strong>
+            </div>
+            <div class="card-content">
+                <input name="h11" class="text-box single-line" id="h11" type="tel" data-val-required="The h11 field is required."
+                       data-val="true" data-val-number="The field h11 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h11)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------h12*@
+        else if (Model.h1 != 0 && Model.h2 != 0 && Model.h3 != 0 && Model.h4 != 0 && Model.h5 != 0 && Model.h6 != 0 && Model.h7 != 0 && Model.h8 != 0 && Model.h9 != 0 && Model.h10 != 0 && Model.h11 != 0 && Model.h12 == 0 && Model.h13 == 0 && Model.h14 == 0 && Model.h15 == 0 && Model.h16 == 0 && Model.h17 == 0 && Model.h18 == 0)
+        {
+            <div class="card-header">
+                <strong>@ViewBag.Hole12</strong>
+            </div>
+            <div class="card-content">
+                <input name="h12" class="text-box single-line" id="h12" type="tel" data-val-required="The h12 field is required."
+                       data-val="true" data-val-number="The field h12 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h12)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------h13*@
+        else if (Model.h1 != 0 && Model.h2 != 0 && Model.h3 != 0 && Model.h4 != 0 && Model.h5 != 0 && Model.h6 != 0 && Model.h7 != 0 && Model.h8 != 0 && Model.h9 != 0 && Model.h10 != 0 && Model.h11 != 0 && Model.h12 != 0 && Model.h13 == 0 && Model.h14 == 0 && Model.h15 == 0 && Model.h16 == 0 && Model.h17 == 0 && Model.h18 == 0)
+        {
+            <div class="card-header">
+                <strong>@ViewBag.Hole13</strong>
+            </div>
+            <div class="card-content">
+                <input name="h13" class="text-box single-line" id="h13" type="tel" data-val-required="The h13 field is required."
+                       data-val="true" data-val-number="The field h13 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h13)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------h14*@
+        else if (Model.h1 != 0 && Model.h2 != 0 && Model.h3 != 0 && Model.h4 != 0 && Model.h5 != 0 && Model.h6 != 0 && Model.h7 != 0 && Model.h8 != 0 && Model.h9 != 0 && Model.h10 != 0 && Model.h11 != 0 && Model.h12 != 0 && Model.h13 != 0 && Model.h14 == 0 && Model.h15 == 0 && Model.h16 == 0 && Model.h17 == 0 && Model.h18 == 0)
+        {
+            <div class="card-header">
+                <strong>@ViewBag.Hole14</strong>
+            </div>
+            <div class="card-content">
+                <input name="h14" class="text-box single-line" id="h14" type="tel" data-val-required="The h14 field is required."
+                       data-val="true" data-val-number="The field h14 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h14)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------h15*@
+        else if (Model.h1 != 0 && Model.h2 != 0 && Model.h3 != 0 && Model.h4 != 0 && Model.h5 != 0 && Model.h6 != 0 && Model.h7 != 0 && Model.h8 != 0 && Model.h9 != 0 && Model.h10 != 0 && Model.h11 != 0 && Model.h12 != 0 && Model.h13 != 0 && Model.h14 != 0 && Model.h15 == 0 && Model.h16 == 0 && Model.h17 == 0 && Model.h18 == 0)
+        {
+
+            <div class="card-header">
+                <strong>@ViewBag.Hole15</strong>
+            </div>
+            <div class="card-content">
+                <input name="h15" class="text-box single-line" id="h15" type="tel" data-val-required="The h15 field is required."
+                       data-val="true" data-val-number="The field h15 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h15)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------h16*@
+        else if (Model.h1 != 0 && Model.h2 != 0 && Model.h3 != 0 && Model.h4 != 0 && Model.h5 != 0 && Model.h6 != 0 && Model.h7 != 0 && Model.h8 != 0 && Model.h9 != 0 && Model.h10 != 0 && Model.h11 != 0 && Model.h12 != 0 && Model.h13 != 0 && Model.h14 != 0 && Model.h15 != 0 && Model.h16 == 0 && Model.h17 == 0 && Model.h18 == 0)
+        {
+            <div class="card-header">
+                <strong>@ViewBag.Hole16</strong>
+            </div>
+            <div class="card-content">
+                <input name="h16" class="text-box single-line" id="h16" type="tel" data-val-required="The h16 field is required."
+                       data-val="true" data-val-number="The field h16 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h16)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------h17*@
+        else if (Model.h1 != 0 && Model.h2 != 0 && Model.h3 != 0 && Model.h4 != 0 && Model.h5 != 0 && Model.h6 != 0 && Model.h7 != 0 && Model.h8 != 0 && Model.h9 != 0 && Model.h10 != 0 && Model.h11 != 0 && Model.h12 != 0 && Model.h13 != 0 && Model.h14 != 0 && Model.h15 != 0 && Model.h16 != 0 && Model.h17 == 0 && Model.h18 == 0)
+        {
+
+            <div class="card-header">
+                <strong>@ViewBag.Hole17</strong>
+            </div>
+            <div class="card-content">
+                <input name="h17" class="text-box single-line" id="h17" type="tel" data-val-required="The h17 field is required."
+                       data-val="true" data-val-number="The field h17 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h17)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------h18*@
+        else if (Model.h1 != 0 && Model.h2 != 0 && Model.h3 != 0 && Model.h4 != 0 && Model.h5 != 0 && Model.h6 != 0 && Model.h7 != 0 && Model.h8 != 0 && Model.h9 != 0 && Model.h10 != 0 && Model.h11 != 0 && Model.h12 != 0 && Model.h13 != 0 && Model.h14 != 0 && Model.h15 != 0 && Model.h16 != 0 && Model.h17 != 0 && Model.h18 == 0)
+        {
+
+            <div class="card-header">
+                <strong>@ViewBag.Hole18</strong>
+            </div>
+            <div class="card-content">
+                <input name="h18" class="text-box single-line" id="h18" type="tel" data-val-required="The h18 field is required."
+                       data-val="true" data-val-number="The field h18 must be a number." value="" onchange="this.form.submit();" autofocus="autofocus"></input>
+                @Html.ValidationMessageFor(model => model.h18)
+            </div>
+        }
+        @*----------------------------------------------------------------------------------------------------------------------END*@
+
+
+        
+        <div class="card-footer"><input type="submit" class="button" value="Save" /></div>
+        </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,20 @@
+Jun 20 16:49 Distance: 3555.11
+Jun 20 16:49 Distance: 3555.11
+Jun 20 16:49 Distance: 3555.11
+Jun 20 16:49 Distance: 3555.11
+Jun 20 16:49 Distance: 3197.61
+Jun 20 16:49 Distance: 3197.61
+Jun 20 16:54 Distance: 2005.68
+Jun 20 16:54 Distance: 2005.68
+Jun 20 16:54 Distance: 2005.68
+Jun 20 16:54 Distance: 2005.68
+Jun 6 14:21 Distance: 1807.30
+Jun 6 2019 14:33 Distance: 2731.07yds
+Jun 6 2019 14:35 Distance: 6387.12yds
+Jun 27 2019 14:55 Distance: 25982.86yds
+Jul 21 2021 10:5 Distance: 1147.63yds
+Jul 21 2021 10:5 Distance: 1032.48yds
+Jul 21 2021 10:7 Distance: 575.35yds
+Jul 21 2021 10:7 Distance: 311.68yds
+Jul 21 2021 10:18 Distance: 5088.79yds
+Jul 21 2021 10:19 Distance: 9104.19yds

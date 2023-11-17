@@ -1,0 +1,28 @@
+﻿@model IEnumerable<MVCWebApplication.Models.Course>
+
+<div class="card-footer no-border">
+    @Html.ActionLink("Create New", "Create", null, new { @class = "button button-fill color-green" })
+    </div>
+
+
+    @foreach (var item in Model)
+    {
+
+        <div class="card facebook-card">
+            <div class="card-header no-border">
+
+                <div class="facebook-name">@Html.DisplayFor(modelItem => item.CourseName)<br><span></span></div>
+                <div class="facebook-date">&nbsp;</div>
+            </div>
+            <div class="card-content">
+
+            </div>
+            <div class="card-footer no-border">
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "button button-fill color-orange" })
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "button button-fill color-black" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "button button-fill color-red" })
+            </div>
+        </div>
+    }
+
+

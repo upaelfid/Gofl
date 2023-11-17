@@ -1,0 +1,649 @@
+﻿@using Newtonsoft.Json
+<html class="pixel-ratio-2 retina watch-active-state">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="~/Content/mestekg.png" />
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?v=3&key=AIzaSyCVCvofl8bKcPyHTK_Ony2qVn7FGg6SzDQ&libraries=geometry"></script>
+    <title>Super Golf League</title>
+
+    @Styles.Render("~/Content/css")
+
+
+</head>
+<body class="framework7-root">
+    <div class="views tabs toolbar-through">
+        <div id="view-1" class="view view-main tab active">
+            <div class="navbar">
+                <div class="navbar-inner navbar-on-center">
+                    <div class="center sliding" id="distance"> Super Golf League</div>
+                    <div class="right contact-edit-link">
+
+                    </div>
+                </div>
+            </div>
+            <div class="pages navbar-through toolbar-through">
+                <div data-page="index-1" class="page">
+                    <div id="text">initializing</div>
+                    <div id="map"></div>
+                    <div class="page-content">
+                        <div class="content-block-title"><img src="~/Content/page-start.png" /><br /><h1>@ViewBag.Title</h1></div>
+                        <div class="content-block">
+                            @RenderBody()
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="toolbar tabbar tabbar-labels">
+            <div class="end-page-margin">
+                <div class="end-page"><img src="~/Content/page-end.png" /></div></div>
+                <div class="toolbar-inner">
+                    <a href="@Url.Action("Index","Home")" class="tab-link"><i class="icon f7-icons">home</i><span class="tabbar-label">Home</span></a>
+                    <a href="@Url.Action("Game","Home")" class="tab-link"> <i class="icon f7-icons">graph_round</i><span class="tabbar-label">Leader Board</span></a>
+                    <a href="@Url.Action("Create","Cards")" class="tab-link"><i class="icon f7-icons">photos</i><span class="tabbar-label">New Card</span></a>
+                    <a href="@Url.Action("Index","Cards")" class="tab-link"><i class="icon f7-icons">favorites</i><span class="tabbar-label">Manage</span></a>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="~/Scripts/compass.js"></script>
+    <script>
+        //this code is for  the compass
+        function startCompass() {
+
+            var byId = function (id) {
+                return document.getElementById(id);
+            };
+            var text = function (id, value) {
+                byId(id).innerHTML = value;
+            };
+            var transform = function (id, commands) {
+                var props = ['transform', 'webkitTransform', 'mozTransform',
+                    'msTransform', 'oTransform'];
+                var node = byId(id);
+                for (var i = 0; i < props.length; i++) {
+                    if (typeof (node.style[props[i]]) != 'undefined') {
+                        node.style[props[i]] = commands;
+                        break;
+                    }
+                }
+            };
+            var round = function (value) {
+                return Math.round(value * 100) / 100;
+            };
+
+            Compass.noSupport(function () {
+                text('text', 'no compass support');
+
+            }).needGPS(function () {
+                text('text', 'need GPS');
+            }).needMove(function () {
+                text('text', 'need move');
+            }).init(function (method) {
+                if (method == 'orientationAndGPS') {
+                    text('meta', 'GPS diff: ' + round(Compass._gpsDiff));
+                }
+            }).watch(function (heading) {
+                text('text', round(heading));
+                transform('compass', 'rotate(' + (-heading) + 'deg)');
+            });
+        }
+        //this code prompts user to allow motions sensor needed for the compass
+
+        var neverBeenClicked = true;
+
+        const argFunc = function () {
+            if (neverBeenClicked === true) {
+                neverBeenClicked = false;
+            }
+        }
+
+        function aoskDeviceMotion() {
+            document.querySelector('#overlay').addEventListener(
+                'click', _askDeviceMotion, false);
+
+        }
+
+        function _askDeviceMotion() {
+            askDeviceMotion(argFunc)
+        }
+
+        function askDeviceMotion(funcArg) {
+
+            try {
+                if (
+                    DeviceMotionEvent &&
+                    typeof DeviceMotionEvent.requestPermission === 'function'
+                ) {
+                    DeviceMotionEvent.requestPermission().then(
+                        response => {
+                            if (response === 'granted') {
+                                grantedDeviceMotion(funcArg);
+
+                                //if there are permissions then start the compass
+                                startCompass();
+
+                            } else {
+                                console.log('Device Motion permission not granted.')
+                            }
+                        })
+                        .catch(console.error)
+                } else {
+                    grantedDeviceMotion(funcArg);
+                    startCompass();
+                }
+            } catch (oops) {
+                console.log('Your device and application combination do not support device motion events.')
+            }
+        }
+
+        function grantedDeviceMotion(funcArg) {
+            window.addEventListener(
+                'devicemotion',
+                funcArg,
+                false
+            );
+        }
+    </script>
+    <script>
+        //hole coordinates
+        var linkLoc = JSON.parse('@Html.Raw(@ViewBag.CourseCoords)');
+        var too = "";
+        
+        $("#dis").click(function () {
+            _askDeviceMotion();
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(getDistanceToLink);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        });
+
+        //calculates distance between two points in km's
+        function calcDistance(p1, p2) {
+            return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(4);
+        };
+
+        function CenterControl(controlDiv, map) {
+
+            // Set CSS for the control border.
+            var controlUI = document.createElement('div');
+            controlUI.style.overflow = 'hidden';
+            controlUI.style.position = 'absolute';
+            controlUI.style.width = '25px';
+            controlUI.style.height = '25px';
+            controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+            controlUI.style.cursor = 'pointer';
+            controlUI.style.margin = '10px 14px';
+            controlUI.style.textAlign = 'center';
+            controlUI.title = 'Click to recenter the map';
+            controlDiv.appendChild(controlUI);
+
+            // Set CSS for the control interior.
+            var controlText = document.createElement('img');
+            controlText.src = 'https://maps.gstatic.com/mapfiles/api-3/images/sv9.png'
+            controlText.style.position = 'absolute';
+            controlText.style.left = '-52px';
+            controlText.style.top = '-86px';
+            controlText.style.height = '175px';
+            controlText.style.width = '164px';
+            controlText.style.border = '0';
+            controlText.style.padding = '0';
+            controlText.style.margin = '0';
+            controlUI.appendChild(controlText);
+
+            // iOS toggle full screen
+            controlUI.addEventListener('click', function () {
+                $("#map").css({ "width": "0", "height": "0", "top": "42px", "margin-left": "0", "position": "fixed" });
+            });
+
+        };
+
+        function CompassControl(compassDiv, map) {
+
+            // Set CSS for the control border.
+            var controlUI = document.createElement('div');
+            controlUI.style.overflow = 'hidden';
+            controlUI.style.position = 'absolute';
+            controlUI.style.width = '35px';
+            controlUI.style.height = '35px';
+            controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+            controlUI.style.cursor = 'pointer';
+            controlUI.style.right = '-27px';
+            controlUI.style.margin = '10px 12px';
+            controlUI.style.textAlign = 'center';
+            controlUI.style.backgroundColor = 'black';
+            controlUI.style.borderRadius = '18px';
+            controlUI.title = 'Click to recenter the map';
+            compassDiv.appendChild(controlUI);
+
+            // Set CSS for the control interior.
+            var controlText = document.createElement('img');
+            controlText.src = 'https://maps.gstatic.com/mapfiles/api-3/images/sv9.png'
+            controlText.style.position = 'absolute';
+            controlText.style.left = '-46px';
+            controlText.style.top = '-8px';
+            controlText.style.height = '175px';
+            controlText.style.width = '164px';
+            controlText.style.border = '0';
+            controlText.style.padding = '0';
+            controlText.style.margin = '0';
+            controlUI.appendChild(controlText);
+
+            // iOS toggle full screen
+            controlUI.addEventListener('click', function () {
+
+                
+                navigator.geolocation.getCurrentPosition(function (location) {
+                    var pins = new pin();
+                    var p2 = pins[0];
+                    var p1 = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
+                    var marker2 = new google.maps.Marker({
+                        position: new google.maps.LatLng(location.coords.latitude, location.coords.longitude),
+                        icon: new google.maps.MarkerImage('/Content/map-pin-red.png'),
+                        map: map
+                    });
+
+                    var boundaries = new google.maps.LatLngBounds();
+                    boundaries.extend(p1);
+                    boundaries.extend(p2);
+                    map.fitBounds(boundaries);
+                    $('div[tabindex=0]').attr('id', 'compass');
+                });
+                //console.log(p1);
+
+                
+
+               
+            });
+
+        };
+        var markerD, markerT;
+        function DriveDistanceControl(distanceDiv, map) {
+            
+            // Set CSS for the control border.
+            var controlUI = document.createElement('div');
+            controlUI.style.backgroundColor = '#fff';
+            controlUI.style.borderRadius = '3px';
+            controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+            controlUI.style.cursor = 'pointer';
+            controlUI.style.marginRight = '10px';
+            controlUI.style.textAlign = 'center';
+            controlUI.title = 'Click to get your drives distance';
+            distanceDiv.appendChild(controlUI);
+
+            // Set CSS for the control interior.
+            var controlText = document.createElement('div');
+            controlText.style.color = 'rgb(25,25,25)';
+            controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+            controlText.style.marginTop = '10px';
+            controlText.style.lineHeight = '27px';
+            controlText.style.paddingLeft = '5px';
+            controlText.style.paddingRight = '5px';
+            controlText.innerHTML = 'Drive';
+            controlUI.appendChild(controlText);
+
+            //Show Drive Distance
+            controlUI.addEventListener('click', function () {
+                var d = new Date();
+                var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+                var day = days[d.getDay()];
+                var hr = d.getHours();
+                var min = d.getMinutes();
+                var date = d.getDate();
+                var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                var month = months[d.getMonth()];
+                var year = d.getFullYear();
+                if (typeof markerT !== 'undefined' && typeof markerD !== 'undefined') {
+                    $("#wor").parent('div').css({ "background-color": "black", "color": "white" });
+                    $("#wor").css({ "color": "white", 'font-size': '.9em', 'left': '0' });
+                    $("#distance").html((calcDistance(markerT.position, markerD.position) * 1093.61).toFixed(2) + " yds");
+
+                    $.ajax({
+                        url: '@Html.Raw(@Url.Action("Contact", "Home"))' + '?s=' + month + ' ' + date + ' ' + year + ' ' + hr + ':' + min + ' Distance: ' + (calcDistance(markerT.position, markerD.position) * 1093.61).toFixed(2) + 'yds',
+                        data: null,
+                        type: "post",
+                        dataType: JSON,
+                        contentType: "application/json; charset=utf-8",
+                        cache: false
+                    });
+                } else {
+                    $("#distance").parent('div').css({ "background-color": "black", "color": "white" });
+                    $("#distance").css({ "color": "white", 'font-size': '.9em', 'left': '0' });
+                    $("#distance").html("Set Your Markers");
+                }
+            });
+
+        }
+
+
+                function TeeControl(teeDiv, map) {
+            
+            // Set CSS for the control border.
+            var controlUI = document.createElement('div');
+            controlUI.style.backgroundColor = '#fff';
+            controlUI.style.borderRadius = '3px';
+            controlUI.style.marginLeft = '15px';
+
+            controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+            controlUI.style.cursor = 'pointer';
+            controlUI.style.marginRight = '10px';
+            controlUI.style.textAlign = 'center';
+            teeDiv.appendChild(controlUI);
+
+            // Set CSS for the control interior.
+            var controlText = document.createElement('div');
+            controlText.style.color = 'rgb(25,25,25)';
+            controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+            controlText.style.marginTop = '10px';
+            controlText.style.lineHeight = '27px';
+            controlText.style.paddingLeft = '5px';
+            controlText.style.paddingRight = '5px';
+            controlText.innerHTML = 'Tee';
+            controlUI.appendChild(controlText);
+
+            //Show Tee Location
+                    controlUI.addEventListener('click', function () {
+                        console.log('clicked');
+                        navigator.geolocation.getCurrentPosition(function (location) {
+
+
+
+                            if (typeof markerT === 'undefined' && typeof markerD === 'undefined') {
+                                controlUI.style.backgroundColor = '#666';
+                                controlText.style.color = '#fff';
+                                markerT = new google.maps.Marker({
+                                    draggable: true,
+                                    position: new google.maps.LatLng(location.coords.latitude, location.coords.longitude),
+                                    map: map
+                                });
+
+                            } else if (typeof markerT !== 'undefined' && typeof markerD === 'undefined') {
+
+                                markerD = new google.maps.Marker({
+                                    draggable: true,
+                                    position: new google.maps.LatLng(location.coords.latitude, location.coords.longitude),
+                                    map: map
+                                });
+                            }
+                           
+                        });
+                        
+                    });
+
+        }
+
+        var pin =  function() {
+            if (document.querySelector('.front9') !== null) {
+                var h1 = parseInt(document.getElementById("hole1").getElementsByTagName('div')[1].innerHTML.trim());
+                var h2 = parseInt(document.getElementById("hole2").getElementsByTagName('div')[1].innerHTML.trim());
+                var h3 = parseInt(document.getElementById("hole3").getElementsByTagName('div')[1].innerHTML.trim());
+                var h4 = parseInt(document.getElementById("hole4").getElementsByTagName('div')[1].innerHTML.trim());
+                var h5 = parseInt(document.getElementById("hole5").getElementsByTagName('div')[1].innerHTML.trim());
+                var h6 = parseInt(document.getElementById("hole6").getElementsByTagName('div')[1].innerHTML.trim());
+                var h7 = parseInt(document.getElementById("hole7").getElementsByTagName('div')[1].innerHTML.trim());
+                var h8 = parseInt(document.getElementById("hole8").getElementsByTagName('div')[1].innerHTML.trim());
+                var h9 = parseInt(document.getElementById("hole9").getElementsByTagName('div')[1].innerHTML.trim());
+
+
+                //front9
+                if (h1 === 0 && h2 === 0 & h3 === 0 && h4 === 0 && h5 === 0 && h6 === 0 && h7 === 0 && h8 === 0 && h9 === 0) {
+                    var p2 = new google.maps.LatLng(linkLoc[0]["lat1"], linkLoc[0]["ln1"]);
+                    var too = "1st hole";
+                    return [p2, too];
+                };
+
+                if (h1 !== 0 && h2 === 0 & h3 === 0 && h4 === 0 && h5 === 0 && h6 === 0 && h7 === 0 && h8 === 0 && h9 === 0) {
+                    var p2 = new google.maps.LatLng(linkLoc[0]["lat2"], linkLoc[0]["ln2"]);
+                    var too = "2nd hole";
+                    return [p2, too];
+                };
+
+                if (h1 !== 0 && h2 !== 0 & h3 === 0 && h4 === 0 && h5 === 0 && h6 === 0 && h7 === 0 && h8 === 0 && h9 === 0) {
+                    var p2 = new google.maps.LatLng(linkLoc[0]["lat3"], linkLoc[0]["ln3"]);
+                    var too = "3rd hole";
+                    return [p2, too];
+                }
+
+                if (h1 !== 0 && h2 !== 0 & h3 !== 0 && h4 === 0 && h5 === 0 && h6 === 0 && h7 === 0 && h8 === 0 && h9 === 0) {
+                    var p2 = new google.maps.LatLng(linkLoc[0]["lat4"], linkLoc[0]["ln4"]);
+                    var too = "4th hole";
+                    return [p2, too];
+                };
+
+                if (h1 !== 0 && h2 !== 0 & h3 !== 0 && h4 !== 0 && h5 === 0 && h6 === 0 && h7 === 0 && h8 === 0 && h9 === 0) {
+                    var p2 = new google.maps.LatLng(linkLoc[0]["lat5"], linkLoc[0]["ln5"]);
+                    var too = "5th hole";
+                    return [p2, too];
+                };
+
+                if (h1 !== 0 && h2 !== 0 & h3 !== 0 && h4 !== 0 && h5 !== 0 && h6 === 0 && h7 === 0 && h8 === 0 && h9 === 0) {
+                    var p2 = new google.maps.LatLng(linkLoc[0]["lat6"], linkLoc[0]["ln6"]);
+                    var too = "6th hole";
+                    return [p2, too];
+                };
+
+                if (h1 !== 0 && h2 !== 0 & h3 !== 0 && h4 !== 0 && h5 !== 0 && h6 !== 0 && h7 === 0 && h8 === 0 && h9 === 0) {
+                    var p2 = new google.maps.LatLng(linkLoc[0]["lat7"], linkLoc[0]["ln7"]);
+                    var too = "7th hole";
+                    return [p2, too];
+                };
+
+                if (h1 !== 0 && h2 !== 0 & h3 !== 0 && h4 !== 0 && h5 !== 0 && h6 !== 0 && h7 !== 0 && h8 === 0 && h9 === 0) {
+                    var p2 = new google.maps.LatLng(linkLoc[0]["lat8"], linkLoc[0]["ln8"]);
+                    var too = "8th hole";
+                    return [p2, too];
+                };
+
+                if (h1 !== 0 && h2 !== 0 & h3 !== 0 && h4 !== 0 && h5 !== 0 && h6 !== 0 && h7 !== 0 && h8 !== 0 && h9 === 0) {
+                    var p2 = new google.maps.LatLng(linkLoc[0]["lat9"], linkLoc[0]["ln9"]);
+                    var too = "9th hole";
+                    return [p2, too];
+                };
+            }
+            else
+                if (document.querySelector('.back9') !== null) {
+                    var h10 = parseInt(document.getElementById("hole10").getElementsByTagName('div')[1].innerHTML.trim());
+                    var h11 = parseInt(document.getElementById("hole11").getElementsByTagName('div')[1].innerHTML.trim());
+                    var h12 = parseInt(document.getElementById("hole12").getElementsByTagName('div')[1].innerHTML.trim());
+                    var h13 = parseInt(document.getElementById("hole13").getElementsByTagName('div')[1].innerHTML.trim());
+                    var h14 = parseInt(document.getElementById("hole14").getElementsByTagName('div')[1].innerHTML.trim());
+                    var h15 = parseInt(document.getElementById("hole15").getElementsByTagName('div')[1].innerHTML.trim());
+                    var h16 = parseInt(document.getElementById("hole16").getElementsByTagName('div')[1].innerHTML.trim());
+                    var h17 = parseInt(document.getElementById("hole17").getElementsByTagName('div')[1].innerHTML.trim());
+                    var h18 = parseInt(document.getElementById("hole18").getElementsByTagName('div')[1].innerHTML.trim());
+
+
+                    //Back9
+                    if (h10 === 0 && h11 === 0 & h12 === 0 && h13 === 0 && h14 === 0 && h15 === 0 && h16 === 0 && h17 === 0 && h18 === 0) {
+                        var p2 = new google.maps.LatLng(linkLoc[0]["lat10"], linkLoc[0]["ln10"]);
+                        var too = "10th hole";
+                        return [p2, too];
+                    };
+
+                    if (h10 !== 0 && h11 === 0 & h12 === 0 && h13 === 0 && h14 === 0 && h15 === 0 && h16 === 0 && h17 === 0 && h18 === 0) {
+                        var p2 = new google.maps.LatLng(linkLoc[0]["lat11"], linkLoc[0]["ln11"]);
+                        var too = "11th hole";
+                        return [p2, too];
+                    };
+
+                    if (h10 !== 0 && h11 !== 0 & h12 === 0 && h13 === 0 && h14 === 0 && h15 === 0 && h16 === 0 && h17 === 0 && h18 === 0) {
+                        var p2 = new google.maps.LatLng(linkLoc[0]["lat12"], linkLoc[0]["ln12"]);
+                        var too = "12th hole";
+                        return [p2, too];
+                    }
+
+                    if (h10 !== 0 && h11 !== 0 & h12 !== 0 && h13 === 0 && h14 === 0 && h15 === 0 && h16 === 0 && h17 === 0 && h18 === 0) {
+                        var p2 = new google.maps.LatLng(linkLoc[0]["lat13"], linkLoc[0]["ln13"]);
+                        var too = "13th hole";
+                        return [p2, too];
+                    };
+
+                    if (h10 !== 0 && h11 !== 0 & h12 !== 0 && h13 !== 0 && h14 === 0 && h15 === 0 && h16 === 0 && h17 === 0 && h18 === 0) {
+                        var p2 = new google.maps.LatLng(linkLoc[0]["lat14"], linkLoc[0]["ln14"]);
+                        var too = "14th hole";
+                        return [p2, too];
+                    };
+
+                    if (h10 !== 0 && h11 !== 0 & h12 !== 0 && h13 !== 0 && h14 !== 0 && h15 === 0 && h16 === 0 && h17 === 0 && h18 === 0) {
+                        var p2 = new google.maps.LatLng(linkLoc[0]["lat15"], linkLoc[0]["ln15"]);
+                        var too = "15th hole";
+                        return [p2, too];
+                    };
+
+                    if (h10 !== 0 && h11 !== 0 & h12 !== 0 && h13 !== 0 && h14 !== 0 && h15 !== 0 && h16 === 0 && h17 === 0 && h18 === 0) {
+                        var p2 = new google.maps.LatLng(linkLoc[0]["lat16"], linkLoc[0]["ln16"]);
+                        var too = "16th hole";
+                        return [p2, too];
+                    };
+
+                    if (h10 !== 0 && h11 !== 0 & h12 !== 0 && h13 !== 0 && h14 !== 0 && h15 !== 0 && h16 !== 0 && h17 === 0 && h18 === 0) {
+                        var p2 = new google.maps.LatLng(linkLoc[0]["lat17"], linkLoc[0]["ln17"]);
+                        var too = "17th hole";
+                        return [p2, too];
+                    };
+
+                    if (h10 !== 0 && h11 !== 0 & h12 !== 0 && h13 !== 0 && h14 !== 0 && h15 !== 0 && h16 !== 0 && h17 !== 0 && h18 === 0) {
+                        var p2 = new google.maps.LatLng(linkLoc[0]["lat18"], linkLoc[0]["ln18"]);
+                        var too = "18th hole";
+                        return [p2, too];
+                    };
+                }
+                else {
+                    var p2 = new google.maps.LatLng(linkLoc[0]["lat1"], linkLoc[0]["ln1"]);
+                    var too = "Shaker";
+                    return [p2, too];
+                };
+        }
+        
+        function getDistanceToLink(position) {
+            
+            //show map variable
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 18,
+                mapTypeId: google.maps.MapTypeId.SATELLITE,
+                mapTypeControl: false,
+                fullscreenControl: false,
+                streetViewControl: false,
+                zoomControl: false,
+            });
+            // Create the DIV to hold the control and call the CenterControl()
+            // constructor passing in this DIV.
+            var centerControlDiv = document.createElement('div');
+            var centerControl = new CenterControl(centerControlDiv, map);
+            centerControlDiv.index = 1;
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
+
+            // Create the DIV to hold the control and call the CenterControl()
+            // constructor passing in this DIV.
+            var compassControlDiv = document.createElement('div');
+            var compassControl = new CompassControl(compassControlDiv, map);
+            compassControlDiv.index = 1;
+            map.controls[google.maps.ControlPosition.TOP_CENTER].push(compassControlDiv);
+
+            // Create the DIV to hold the control and call the CenterControl()
+            // constructor passing in this DIV.
+            var distanceControlDiv = document.createElement('div');
+            var distanceControl = new DriveDistanceControl(distanceControlDiv, map);
+            distanceControlDiv.index = 1;
+            map.controls[google.maps.ControlPosition.TOP_RIGHT].push(distanceControlDiv);
+
+
+            var teeControlDiv = document.createElement('div');
+            var teeControl = new TeeControl(teeControlDiv, map);
+            teeControlDiv.index = 1;
+            map.controls[google.maps.ControlPosition.LEFT_CENTER].push(teeControlDiv);
+
+            var pins = new pin();
+            var p2 = pins[0];
+            var too = pins[1];
+
+
+
+            function onSuccess(position) {
+
+                var l = position.coords.latitude.toFixed(6);
+                var s = position.coords.longitude.toFixed(6);
+                var p1 = new google.maps.LatLng(l, s);
+
+                $("#distance").parent('div').css({ "background-color": "black", "color": "white" });
+                $("#distance").css({ "color": "white", 'font-size': '1.3em', 'left': '0' });
+                $("#distance").html((calcDistance(p1, p2) * 1093.61).toFixed(2) + " yd to " + too);               
+            }
+
+            // onError Callback receives a PositionError object
+            function onError(error) {
+                alert('code: ' + error.code + '\n' +
+                      'message: ' + error.message + '\n');
+            }
+
+            // Options: throw an error if no update is received every 30 seconds.
+            navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000, enableHighAccuracy: true });
+            map.setCenter(p2);
+
+            //map.addListener('click', function (e) {
+            //    placeMarker(e.latLng, map);
+            //});
+
+            function placeMarker(position, map) {
+                if (typeof markerT === 'undefined' && typeof markerD === 'undefined') {
+
+                     markerT = new google.maps.Marker({
+                        draggable: true,
+                        position: position,
+                        map: map
+                    });
+                    map.panTo(position);
+                } else if (typeof markerT !== 'undefined' && typeof markerD === 'undefined') {
+
+                     markerD = new google.maps.Marker({
+                        draggable: true,
+                        position: position,
+                        map: map
+                     });
+                }
+            }
+
+
+            $("#map").css({ "width": "100%", "height": "83%", "margin-left": "0", "margin-top": "26px", "position": "fixed" });
+           
+            // Creating a marker and positioning it on the map  
+            var marker = new google.maps.Marker({
+                position: p2,
+                icon: new google.maps.MarkerImage('/Content/flag2.png'),
+                animation: google.maps.Animation.DROP,
+                map: map
+            });
+
+            
+
+        };
+        //For iphone standalone app
+        if (("standalone" in window.navigator) && window.navigator.standalone) {
+            var noddy, remotes = false;
+            document.addEventListener('click', function (event) {
+                noddy = event.target;
+                while (noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
+                    noddy = noddy.parentNode;
+                }
+                if ('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotes)) {
+                    event.preventDefault();
+                    document.location.href = noddy.href;
+                }
+            }, false);
+        }
+    </script>
+</body>
+</html>

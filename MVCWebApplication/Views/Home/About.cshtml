@@ -1,0 +1,303 @@
+﻿@model IEnumerable<MVCWebApplication.Models.Card>
+@{
+    ViewBag.Title = "Home Page";
+    ViewBag.Date = String.Format("{0:MMMM} {0:dd} {0:yyyy}", @DateTime.Now);
+    var counter = 0;
+}
+
+
+@foreach (var item in Model)
+{
+
+    //Add to the counter to remove placeholder
+    counter++;
+    //Begin Card
+    <table>
+        <tr class="hole">
+            <th colspan="11" style="margin-top: 4em;">
+                @item.Name
+            </th>
+        </tr>
+        <tr>
+            <td rowspan="2" style="width: 20%; font-weight: bolder; font-size: 3em;" class="hole">
+                @(@item.h1 + @item.h2 + @item.h3 + @item.h4 + @item.h5 + @item.h6 + @item.h7 + @item.h8 +
+            @item.h9 + @item.h10 + +@item.h11 + @item.h12 + @item.h13 + @item.h14 + @item.h15 + @item.h16 + @item.h17 + @item.h18)
+            </td>
+            @if (item.h1 < 3 && item.h1 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 1</p></div>
+                    @Html.DisplayFor(modelItem => item.h1)
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 1</p></div>
+                @Html.DisplayFor(modelItem => item.h1)
+            </td>}
+            @if (item.h2 < 3 && item.h2 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 2</p></div>
+                    <div class="circle">
+                        @Html.DisplayFor(modelItem => item.h2)
+                    </div>
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 2</p></div>
+                @Html.DisplayFor(modelItem => item.h2)
+            </td>}
+            @if (item.h3 < 3 && item.h3 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 3</p></div>
+                    @Html.DisplayFor(modelItem => item.h3)
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 3</p></div>
+                @Html.DisplayFor(modelItem => item.h3)
+            </td>}
+            @if (item.h4 < 3 && item.h4 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 4</p></div>
+                    @Html.DisplayFor(modelItem => item.h4)
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 4</p></div>
+                @Html.DisplayFor(modelItem => item.h4)
+            </td>}
+            @if (item.h5 < 3 && item.h5 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 5</p></div>
+                    @Html.DisplayFor(modelItem => item.h5)
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 5</p></div>
+                @Html.DisplayFor(modelItem => item.h5)
+            </td>}
+            @if (item.h6 < 3 && item.h6 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 6</p></div>
+                    @Html.DisplayFor(modelItem => item.h6)
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 6</p></div>
+                @Html.DisplayFor(modelItem => item.h6)
+            </td>}
+            @if (item.h7 < 3 && item.h7 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 7</p></div>
+                    @Html.DisplayFor(modelItem => item.h7)
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 7</p></div>
+                @Html.DisplayFor(modelItem => item.h7)
+            </td>}
+            @if (item.h8 < 3 && item.h8 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 8</p></div>
+                    @Html.DisplayFor(modelItem => item.h8)
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 8</p></div>
+                @Html.DisplayFor(modelItem => item.h8)
+            </td>}
+            @if (item.h9 < 3 && item.h9 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 9</p></div>
+                    @Html.DisplayFor(modelItem => item.h9)
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 9</p></div>
+                @Html.DisplayFor(modelItem => item.h9)
+            </td>}
+            <td class="hole" rowspan="2">
+                <div></div>
+                &nbsp;
+            </td>
+
+        </tr>
+        <tr>
+            @if (item.h10 < 3 && item.h10 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 10</p></div>
+                    @Html.DisplayFor(modelItem => item.h10)
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 10</p></div>
+                @Html.DisplayFor(modelItem => item.h10)
+            </td>}
+            @if (item.h11 < 3 && item.h11 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 11</p></div>
+                    @Html.DisplayFor(modelItem => item.h11)
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 11</p></div>
+                @Html.DisplayFor(modelItem => item.h11)
+            </td>}
+            @if (item.h12 < 3 && item.h12 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 12</p></div>
+                    @Html.DisplayFor(modelItem => item.h12)
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 12</p></div>
+                @Html.DisplayFor(modelItem => item.h12)
+            </td>}
+            @if (item.h13 < 3 && item.h13 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 13</p></div>
+                    @Html.DisplayFor(modelItem => item.h13)
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 13</p></div>
+                @Html.DisplayFor(modelItem => item.h13)
+            </td>}
+            @if (item.h14 < 3 && item.h14 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 14</p></div>
+                    @Html.DisplayFor(modelItem => item.h14)
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 14</p></div>
+                @Html.DisplayFor(modelItem => item.h14)
+            </td>}
+            @if (item.h15 < 3 && item.h15 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 15</p></div>
+                    @Html.DisplayFor(modelItem => item.h15)
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 15</p></div>
+                @Html.DisplayFor(modelItem => item.h15)
+            </td>}
+            @if (item.h16 < 3 && item.h16 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 16</p></div>
+                    @Html.DisplayFor(modelItem => item.h16)
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 16</p></div>
+                @Html.DisplayFor(modelItem => item.h16)
+            </td>}
+            @if (item.h17 < 3 && item.h17 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 17</p></div>
+                    @Html.DisplayFor(modelItem => item.h17)
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 17</p></div>
+                @Html.DisplayFor(modelItem => item.h17)
+            </td>}
+            @if (item.h18 < 3 && item.h18 != 0)
+            {
+                <td class="birdie">
+                    <div class="score"><p>HOLE 18</p></div>
+                    @Html.DisplayFor(modelItem => item.h18)
+                </td>
+            }
+            else
+            {
+            <td class="par">
+                <div class="score"><p>HOLE 18</p></div>
+                @Html.DisplayFor(modelItem => item.h18)
+            </td>}
+        </tr>
+        @if (User.Identity.Name == item.Name && item.h18 == 0)
+        {
+        <td colspan="11">
+            @Html.ActionLink("UPDATE", "EditField", "Card", new { id = item.Id }, new { @class = "uk-width-1-1 uk-button uk-button-primary", @style = "float:center; width:100%;" })
+    </td>
+        }
+        else
+        {
+        }
+    </table>
+
+}
+
+
+@if (counter == 0)
+{
+    <div class="uk-panel-box">
+        <p style="color:gray; font-size:4em; line-height:.8em;">Mestek Golf </p>
+        <p style="color:gray; font-size:4em; line-height:.8em;">Score Keeper</p>
+        <div style="padding-top:2em; padding-bottom:1em;">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="auto" version="1.1" viewBox="3000 5000 7000 1270" style="height:auto !important;">
+            <g>
+            <g>
+            <path class="fil0" d="M4226 5554c1,170 -10,140 -250,140 -244,0 -240,27 -240,-155 0,-42 -8,-159 11,-187 27,-41 104,-28 166,-28 77,0 331,4 388,-1 -10,-30 -42,-59 -70,-73 -40,-20 -81,-15 -129,-15 -94,0 -189,0 -283,0 -80,0 -149,33 -168,119 -10,44 -5,225 -4,280 2,80 62,142 137,149 36,3 230,1 283,1 105,0 173,6 222,-65 23,-34 27,-68 27,-117 0,-46 1,-94 0,-140l-324 0 1 90 234 2z" />
+            <path class="fil0" d="M4575 5325c37,-7 165,-1 212,-1 174,0 225,-24 225,97 0,36 0,72 0,108 0,63 16,152 -50,164 -32,6 -260,2 -325,2 -92,0 -115,-2 -115,-99 0,-36 0,-72 0,-108 0,-73 -17,-148 53,-162zm525 326c5,-33 4,-268 -2,-297 -9,-43 -35,-74 -61,-93 -35,-25 -74,-27 -124,-27 -101,0 -203,0 -304,0 -53,0 -88,8 -120,34 -25,19 -48,55 -54,96 -5,35 -5,272 2,302 11,45 35,72 63,91 40,27 68,27 123,27 101,0 203,0 304,0 88,0 160,-40 173,-132z" />
+            <path class="fil0" d="M6386 5332l1 -90 -14 0c-157,-1 -383,-4 -535,0l0 535 89 0 1 -222 443 0 0 -90 -441 0c-6,-20 -3,-101 -3,-128l459 -4z" />
+            <polygon class="fil0" points="5227,5777 5746,5777 5746,5688 5316,5688 5316,5242 5227,5242 " />
+  </g>
+ </g>
+</svg>
+        </div>
+        <p style="color:gray; font-size:.6em;"><i>Showing Active Score Cards for @ViewBag.Date</i></p>
+    </div>
+}

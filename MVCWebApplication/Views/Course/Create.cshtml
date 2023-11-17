@@ -1,0 +1,475 @@
+﻿@model MVCWebApplication.Models.Course
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="card">
+        <div class="card-header">Create Course</div>
+        <div class="card-content">
+            <div class="card-content-inner">
+                <div class="list-block">
+                    <ul>
+                        <!-- Text inputs -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Course Name</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.CourseName)
+                                        @Html.ValidationMessageFor(model => model.CourseName)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat1</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h1lat )
+                                        @Html.ValidationMessageFor(model => model.h1lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng1</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h1ln )
+                                        @Html.ValidationMessageFor(model => model.h1ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat2</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h2lat )
+                                        @Html.ValidationMessageFor(model => model.h2lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng2</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h2ln )
+                                        @Html.ValidationMessageFor(model => model.h2ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat3</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h3lat )
+                                        @Html.ValidationMessageFor(model => model.h3lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng3</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h3ln )
+                                        @Html.ValidationMessageFor(model => model.h3ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat4</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h4lat )
+                                        @Html.ValidationMessageFor(model => model.h4lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng4</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h4ln )
+                                        @Html.ValidationMessageFor(model => model.h4ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat5</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h5lat )
+                                        @Html.ValidationMessageFor(model => model.h5lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng5</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h5ln )
+                                        @Html.ValidationMessageFor(model => model.h5ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat6</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h6lat )
+                                        @Html.ValidationMessageFor(model => model.h6lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng6</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h6ln )
+                                        @Html.ValidationMessageFor(model => model.h6ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat7</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h7lat )
+                                        @Html.ValidationMessageFor(model => model.h7lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng7</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h7ln )
+                                        @Html.ValidationMessageFor(model => model.h7ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat8</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h8lat )
+                                        @Html.ValidationMessageFor(model => model.h8lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng8</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h8ln )
+                                        @Html.ValidationMessageFor(model => model.h8ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat9</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h9lat )
+                                        @Html.ValidationMessageFor(model => model.h9lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng9</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h9ln )
+                                        @Html.ValidationMessageFor(model => model.h9ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat10</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h10lat )
+                                        @Html.ValidationMessageFor(model => model.h10lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng10</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h10ln )
+                                        @Html.ValidationMessageFor(model => model.h10ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat11</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h11lat )
+                                        @Html.ValidationMessageFor(model => model.h11lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng11</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h11ln )
+                                        @Html.ValidationMessageFor(model => model.h11ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat12</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h12lat )
+                                        @Html.ValidationMessageFor(model => model.h12lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng12</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h12ln )
+                                        @Html.ValidationMessageFor(model => model.h12ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat13</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h13lat )
+                                        @Html.ValidationMessageFor(model => model.h13lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng13</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h13ln )
+                                        @Html.ValidationMessageFor(model => model.h13ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat14</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h14lat )
+                                        @Html.ValidationMessageFor(model => model.h14lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng14</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h14ln )
+                                        @Html.ValidationMessageFor(model => model.h14ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat15</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h15lat )
+                                        @Html.ValidationMessageFor(model => model.h15lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng15</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h15ln )
+                                        @Html.ValidationMessageFor(model => model.h15ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat16</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h16lat )
+                                        @Html.ValidationMessageFor(model => model.h16lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng16</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h16ln )
+                                        @Html.ValidationMessageFor(model => model.h16ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat17</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h17lat )
+                                        @Html.ValidationMessageFor(model => model.h17lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng17</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h17ln )
+                                        @Html.ValidationMessageFor(model => model.h17ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lat18</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h18lat )
+                                        @Html.ValidationMessageFor(model => model.h18lat)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">flag_fill</i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">Lng18</div>
+                                    <div class="item-input">
+                                        @Html.EditorFor(model => model.h18ln )
+                                        @Html.ValidationMessageFor(model => model.h18ln)
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        @Html.ValidationSummary(true)       
+        <div class="card-footer"><input class="button button-fill" type="submit" value="Create" /></div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

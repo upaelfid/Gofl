@@ -1,0 +1,85 @@
+﻿@model MVCWebApplication.Models.Card
+
+@{
+    ViewBag.Title = "Delete";
+}
+<div class="delete-card">
+    <h3>Are you sure you want to delete this?</h3>
+    <div class="card facebook-card">
+        <div class="card-header no-border">
+            <div class="facebook-avatar">@Model.Name</div>
+            <div class="facebook-name">&nbsp;</div>
+            <div class="facebook-date">@Model.Team</div>
+        </div>
+        <div class="card-content">
+            <table>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.h1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.h2)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.h3)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.h4)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.h5)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.h6)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.h7)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.h8)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.h9)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.h10)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.h11)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.h12)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.h13)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.h14)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.h15)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.h16)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.h17)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.h18)
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="card-footer no-border delete">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <input type="submit" value="Delete" class="button button-fill color-red" />
+            }
+        </div>
+    </div>
+</div>

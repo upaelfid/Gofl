@@ -1,0 +1,49 @@
+﻿@using MVCWebApplication.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+    <div class="list-block">
+        <ul>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title label">Username</div>
+                    <div class="item-input">
+                        @Html.TextBoxFor(m => m.Email, new { @placeholder = "EMAIL" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title label">Password</div>
+                    <div class="item-input">
+                        @Html.PasswordFor(m => m.Password, new { @placeholder = "PASSWORD" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </li>
+            <li>
+                <label class="label-radio item-content">
+                    <!-- Checked by default -->
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                           
+          <i class="icon icon-form-checkbox"></i>
+                    <div class="item-inner">
+                        <div class="item-title">Remember me?</div>
+                    </div>
+                </label>
+            </li>
+        </ul>
+    </div>
+    <input class="button button-fill button-big color-lightblue" type="submit" value="LOG IN" />
+    <hr />
+    @Html.ActionLink("NEW USER", "Register", null, new { @class = "button button-fill button-big color-orange" })
+ 
+}
+@section Scripts {@Scripts.Render("~/bundles/jqueryval")}

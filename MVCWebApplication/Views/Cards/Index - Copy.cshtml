@@ -1,0 +1,102 @@
+﻿@model IEnumerable<MVCWebApplication.Models.Card>
+
+@{
+    ViewBag.Title = "Manage Cards";
+    ViewBag.UserName = User.Identity.Name;
+}
+
+
+<h2 style="margin-bottom:1em;"> @ViewBag.UserName.ToUpper() SCORE CARDS</h2>
+
+
+@foreach (var item in Model)
+{
+    if (User.Identity.Name == item.Name)
+    {
+        <table>
+            <tr>
+                <th colspan="11">
+                    @ViewBag.UserName @Html.DisplayFor(modelItem => item.Team)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+
+            <tr>
+                <td rowspan="2" style="width:20%; font-weight:bolder">
+                    @(@item.h1 + @item.h2 + @item.h3 + @item.h4 + @item.h5 + @item.h6 + @item.h7 + @item.h8 +
+            @item.h9 + @item.h10 + +@item.h11 + @item.h12 + @item.h13 + @item.h14 + @item.h15 + @item.h16 + @item.h17 + @item.h18)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.h1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.h2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.h3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.h4)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.h5)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.h6)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.h7)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.h8)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.h9)
+                </td>
+                <td rowspan="2" style="font-size:.5em;" class="verticalText">
+                    @String.Format("{0:MMM dd yyyy}", item.gDate)
+                </td>
+
+            </tr>
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.h10)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.h11)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.h12)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.h13)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.h14)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.h15)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.h16)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.h17)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.h18)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="11">
+                    @Html.ActionLink("Edit", "EditCard", new { id = item.Id }, new { @class = "uk-width-1-1 uk-button uk-button-primary", @style = "float:left; width:50%;" })
+
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "uk-width-1-1 uk-button uk-button-primary", @style = "float:left; width:45%; background-image:-webkit-linear-gradient(top,#b94a48,#C50012);;" })
+                </td>
+            </tr>
+        </table>
+    }
+}

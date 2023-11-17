@@ -1,0 +1,18 @@
+﻿@model IEnumerable<MVCWebApplication.Models.Card>
+@{
+    ViewBag.Date = String.Format("{0:MMMM} {0:dd} {0:yyyy}", @DateTime.Now);
+}
+
+@Html.Partial("_Front9")
+@Html.Partial("_Back9")
+@Html.Partial("_Eighteen")
+
+@if (Html.Partial("_Front9").ToHtmlString().Length + Html.Partial("_Back9").ToHtmlString().Length + Html.Partial("_Eighteen").ToHtmlString().Length < 208)
+{
+<a href="@Url.Action("Create","Cards")">
+    <div id="warped">
+        <span class='w0'>M</span><span class='w1'>e</span><span class='w2'>s</span><span class='w3'>t</span><span class='w4'>e</span><span class='w5'>k</span><span class='w6'> </span><span class='w7'>G</span><span class='w8'>o</span><span class='w9'>l</span><span class='w10'>d</span><span class='w11'> </span><span class='w12'>*</span><span class='w13'> </span><span class='w14'>C</span><span class='w15'>l</span><span class='w16'>i</span><span class='w17'>c</span><span class='w18'>k</span><span class='w19'> </span><span class='w20'>*</span><span class='w21'> </span><span class='w22'>M</span><span class='w23'>e</span><span class='w24'>s</span><span class='w25'>t</span><span class='w26'>e</span><span class='w27'>k</span><span class='w28'> </span><span class='w29'>G</span><span class='w30'>o</span><span class='w31'>l</span><span class='w32'>d</span><span class='w33'> </span><span class='w34'></span><span class='w35'>C</span><span class='w36'>l</span><span class='w37'>i</span><span class='w38'>c</span><span class='w39'>k</span><span class='w40'> </span><span class='w41'></span>
+    </div>
+    <b class="ball"></b>
+</a>
+}

@@ -1,0 +1,209 @@
+﻿@model MVCWebApplication.Models.Card
+
+    @{
+        ViewBag.Title = "Full Edit";
+        ViewBag.Hole1 = "HOLE 1";
+        ViewBag.Hole2 = "HOLE 2";
+        ViewBag.Hole3 = "HOLE 3";
+        ViewBag.Hole4 = "HOLE 4";
+        ViewBag.Hole5 = "HOLE 5";
+        ViewBag.Hole6 = "HOLE 6";
+        ViewBag.Hole7 = "HOLE 7";
+        ViewBag.Hole8 = "HOLE 8";
+        ViewBag.Hole9 = "HOLE 9";
+        ViewBag.Hole10 = "HOLE 10";
+        ViewBag.Hole11 = "HOLE 11";
+        ViewBag.Hole12 = "HOLE 12";
+        ViewBag.Hole13 = "HOLE 13";
+        ViewBag.Hole14 = "HOLE 14";
+        ViewBag.Hole15 = "HOLE 15";
+        ViewBag.Hole16 = "HOLE 16";
+        ViewBag.Hole17 = "HOLE 17";
+        ViewBag.Hole18 = "HOLE 18";
+
+    }
+
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <fieldset>
+        <legend>Card</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div style="visibility:hidden;">
+            @Html.HiddenFor(model => model.Name)
+        </div>
+        <div style="visibility:hidden;">
+            @Html.HiddenFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            <strong>Team Name</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Team)
+            @Html.ValidationMessageFor(model => model.Team)
+        </div>
+        <div class="editor-label">
+            <strong>@ViewBag.Hole1</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h1)
+            @Html.ValidationMessageFor(model => model.h1)
+        </div>
+
+        <div class="editor-label">
+            <strong>@ViewBag.Hole2</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h2)
+            @Html.ValidationMessageFor(model => model.h2)
+        </div>
+
+        <div class="editor-label">
+            <strong>@ViewBag.Hole3</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h3)
+            @Html.ValidationMessageFor(model => model.h3)
+        </div>
+
+        <div class="editor-label">
+            <strong>@ViewBag.Hole4</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h4)
+            @Html.ValidationMessageFor(model => model.h4)
+        </div>
+
+        <div class="editor-label">
+            <strong>@ViewBag.Hole5</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h5)
+            @Html.ValidationMessageFor(model => model.h5)
+        </div>
+
+        <div class="editor-label">
+            <strong>@ViewBag.Hole6</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h6)
+            @Html.ValidationMessageFor(model => model.h6)
+        </div>
+
+        <div class="editor-label">
+            <strong>@ViewBag.Hole7</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h7)
+            @Html.ValidationMessageFor(model => model.h7)
+        </div>
+
+        <div class="editor-label">
+            <strong>@ViewBag.Hole8</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h8)
+            @Html.ValidationMessageFor(model => model.h8)
+        </div>
+
+        <div class="editor-label">
+            <strong>@ViewBag.Hole9</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h9)
+            @Html.ValidationMessageFor(model => model.h9)
+        </div>
+
+        <div class="editor-label">
+            <strong>@ViewBag.Hole10</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h10)
+            @Html.ValidationMessageFor(model => model.h10)
+        </div>
+
+        <div class="editor-label">
+            <strong>@ViewBag.Hole11</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h11)
+            @Html.ValidationMessageFor(model => model.h11)
+        </div>
+
+        <div class="editor-label">
+            <strong>@ViewBag.Hole12</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h12)
+            @Html.ValidationMessageFor(model => model.h12)
+        </div>
+
+        <div class="editor-label">
+            <strong>@ViewBag.Hole13</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h13)
+            @Html.ValidationMessageFor(model => model.h13)
+        </div>
+
+        <div class="editor-label">
+            <strong>@ViewBag.Hole14</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h14)
+            @Html.ValidationMessageFor(model => model.h14)
+        </div>
+
+        <div class="editor-label">
+            <strong>@ViewBag.Hole15</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h15)
+            @Html.ValidationMessageFor(model => model.h15)
+        </div>
+
+        <div class="editor-label">
+            <strong>@ViewBag.Hole16</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h16)
+            @Html.ValidationMessageFor(model => model.h16)
+        </div>
+
+        <div class="editor-label">
+            <strong>@ViewBag.Hole17</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h17)
+            @Html.ValidationMessageFor(model => model.h17)
+        </div>
+
+        <div class="editor-label">
+            <strong>@ViewBag.Hole18</strong>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.h18)
+            @Html.ValidationMessageFor(model => model.h18)
+        </div>
+
+        <p>
+            <input class="uk-width-1-1 uk-button uk-button-primary login" type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,308 @@
+﻿@model IEnumerable<MVCWebApplication.Models.Card>
+
+
+    @foreach (var item in Model)
+    {
+
+            if (item.ccID == 2)
+            {
+                <div class="card facebook-card back9">
+                    <div class="card-header no-border">
+                        <div class="facebook-avatar">@(@item.h1 + @item.h2 + @item.h3 + @item.h4 + @item.h5 + @item.h6 + @item.h7 + @item.h8 +
+            @item.h9 + @item.h10 + +@item.h11 + @item.h12 + @item.h13 + @item.h14 + @item.h15 + @item.h16 + @item.h17 + @item.h18)</div>
+                        <div class="facebook-name">@item.Team<br /><span>@item.CourseName</span></div>
+                        <div class="facebook-date">Back 9</div>
+                    </div>
+                    <div class="card-content">
+                        <table>
+                            <tr>
+                                @if (item.h1 < 4 && item.h1 != 0)
+                    {
+                                    <td id="hole10">
+                                        <div class="score"><p>HOLE 10</p></div>
+                                        <div class="h-1">
+                                            @Html.DisplayFor(modelItem => item.h1)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                        if (item.h1 > 4 && item.h1 != 0)
+                                {
+                                    <td id="hole10">
+                                        <div class="score"><p>HOLE 10</p></div>
+                                        <div class="h-7">
+                                            @Html.DisplayFor(modelItem => item.h1)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td id="hole10" class="par">
+                                        <div class="score"><p>HOLE 10</p></div>
+                                        <div>
+                                            @Html.DisplayFor(modelItem => item.h1)
+                                        </div>
+                                    </td>}
+                                @if (item.h2 < 4 && item.h2 != 0)
+                    {
+                                    <td id="hole11">
+                                        <div class="score"><p>HOLE 11</p></div>
+                                        <div class="h-1">
+                                            @Html.DisplayFor(modelItem => item.h2)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                        if (item.h2 > 4 && item.h2 != 0)
+                                {
+                                    <td id="hole11">
+                                        <div class="score"><p>HOLE 11</p></div>
+                                        <div class="h-7">
+                                            @Html.DisplayFor(modelItem => item.h2)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td id="hole11" class="par">
+                                        <div class="score"><p>HOLE 11</p></div>
+                                        <div>
+                                            @Html.DisplayFor(modelItem => item.h2)
+                                        </div>
+                                    </td>}
+                                @if (item.h3 < 3 && item.h3 != 0)
+                    {
+                                    <td id="hole12">
+                                        <div class="score"><p>HOLE 12</p></div>
+                                        <div class="h-1">
+                                            @Html.DisplayFor(modelItem => item.h3)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                        if (item.h3 > 3 && item.h3 != 0)
+                                {
+                                    <td id="hole12">
+                                        <div class="score"><p>HOLE 12</p></div>
+                                        <div class="h-7">
+                                            @Html.DisplayFor(modelItem => item.h3)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td id="hole12" class="par">
+                                        <div class="score"><p>HOLE 12</p></div>
+                                        <div>
+                                            @Html.DisplayFor(modelItem => item.h3)
+                                        </div>
+                                    </td>}
+                                @if (item.h4 < 4 && item.h4 != 0)
+                    {
+                                    <td id="hole13">
+                                        <div class="score"><p>HOLE 13</p></div>
+                                        <div class="h-1">
+                                            @Html.DisplayFor(modelItem => item.h4)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                        if (item.h4 > 4 && item.h4 != 0)
+                                {
+                                    <td id="hole13">
+                                        <div class="score"><p>HOLE 13</p></div>
+                                        <div class="h-7">
+                                            @Html.DisplayFor(modelItem => item.h4)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td id="hole13" class="par">
+                                        <div class="score"><p>HOLE 13</p></div>
+                                        <div>
+                                            @Html.DisplayFor(modelItem => item.h4)
+                                        </div>
+                                    </td>}
+                                @if (item.h5 < 3 && item.h5 != 0)
+                    {
+                                    <td id="hole14">
+                                        <div class="score"><p>HOLE 14</p></div>
+                                        <div class="h-1">
+                                            @Html.DisplayFor(modelItem => item.h5)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                        if (item.h5 > 3 && item.h5 != 0)
+                                {
+                                    <td id="hole14">
+                                        <div class="score"><p>HOLE 14</p></div>
+                                        <div class="h-7">
+                                            @Html.DisplayFor(modelItem => item.h5)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td id="hole14" class="par">
+                                        <div class="score"><p>HOLE 14</p></div>
+                                        <div>
+                                            @Html.DisplayFor(modelItem => item.h5)
+                                        </div>
+                                    </td>}
+                                @if (item.h6 < 4 && item.h6 != 0)
+                    {
+                                    <td id="hole15">
+                                        <div class="score"><p>HOLE 15</p></div>
+                                        <div class="h-1">
+                                            @Html.DisplayFor(modelItem => item.h6)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                        if (item.h6 > 4 && item.h6 != 0)
+                                {
+                                    <td id="hole15">
+                                        <div class="score"><p>HOLE 15</p></div>
+                                        <div class="h-7">
+                                            @Html.DisplayFor(modelItem => item.h6)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td id="hole15" class="par">
+                                        <div class="score"><p>HOLE 15</p></div>
+                                        <div>
+                                            @Html.DisplayFor(modelItem => item.h6)
+                                        </div>
+                                    </td>}
+                                @if (item.h7 < 4 && item.h7 != 0)
+                    {
+                                    <td id="hole16">
+                                        <div class="score"><p>HOLE 16</p></div>
+                                        <div class="h-1">
+                                            @Html.DisplayFor(modelItem => item.h7)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                        if (item.h7 > 4 && item.h7 != 0)
+                                {
+                                    <td id="hole16">
+                                        <div class="score"><p>HOLE 16</p></div>
+                                        <div class="h-7">
+                                            @Html.DisplayFor(modelItem => item.h7)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td id="hole16" class="par">
+                                        <div class="score"><p>HOLE 16</p></div>
+                                        <div>
+                                            @Html.DisplayFor(modelItem => item.h7)
+                                        </div>
+                                    </td>}
+                                @if (item.h8 < 5 && item.h8 != 0)
+                    {
+                                    <td id="hole17">
+                                        <div class="score"><p>HOLE 17</p></div>
+                                        <div class="h-1">
+                                            @Html.DisplayFor(modelItem => item.h8)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                        if (item.h8 > 5 && item.h8 != 0)
+                                {
+                                    <td id="hole17">
+                                        <div class="score"><p>HOLE 17</p></div>
+                                        <div class="h-7">
+                                            @Html.DisplayFor(modelItem => item.h8)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td id="hole17" class="par">
+                                        <div class="score"><p>HOLE 17</p></div>
+                                        <div>
+                                            @Html.DisplayFor(modelItem => item.h8)
+                                        </div>
+                                    </td>}
+                                @if (item.h9 < 4 && item.h9 != 0)
+                    {
+                                    <td id="hole18">
+                                        <div class="score"><p>HOLE 18</p></div>
+                                        <div class="h-1">
+                                            @Html.DisplayFor(modelItem => item.h9)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                        if (item.h9 > 4 && item.h9 != 0)
+                                {
+                                    <td id="hole18">
+                                        <div class="score"><p>HOLE 18</p></div>
+                                        <div class="h-7">
+                                            @Html.DisplayFor(modelItem => item.h9)
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td id="hole18" class="par">
+                                        <div class="score"><p>HOLE 18</p></div>
+                                        <div>
+                                            @Html.DisplayFor(modelItem => item.h9)
+                                        </div>
+                                    </td>}
+                            </tr>
+                            <tr>
+                                <td class="distance">
+                                    311 yds
+                                </td>
+                                <td class="distance">
+                                    360 yds
+                                </td>
+                                <td class="distance">
+                                    139 yds
+                                </td>
+                                <td class="distance">
+                                    314 yds
+                                </td>
+                                <td class="distance">
+                                    137 yds
+                                </td>
+                                <td class="distance">
+                                    342 yds
+                                </td>
+                                <td class="distance">
+                                    405 yds
+                                </td>
+                                <td class="distance">
+                                    447 yds
+                                </td>
+                                <td class="distance">
+                                    290 yds
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                    <div class="card-footer no-border">
+                        @if (User.Identity.Name == item.Name && item.h9 == 0)
+                        {
+                            @Html.ActionLink("UPDATE", "Edit", "Cards", new { id = item.Id }, new { @class = "button button-fill color-orange" })
+                            <a href="#" id="dis" class="button button-fill color-black">DISTANCE</a>
+                        }
+                        else
+                        {
+                        }
+                    </div>
+                </div>
+            }
+
+    }
