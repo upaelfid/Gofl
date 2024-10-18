@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MVCWebApplication.Models.Drive>
+
+@{
+    ViewBag.Title = "Index";
+    var sortedDrives = Model.OrderByDescending(d => d.dDate);
+}
+
+
+<div class="card-footer no-border">
+    @Html.ActionLink("Create New", "Create", null, new { @class = "button button-fill color-green" })
+</div>
+
+
+@foreach (var item in sortedDrives)
+{
+
+    <div class="card facebook-card">
+        <div class="card-header no-border">
+
+            <div class="facebook-name">@Html.DisplayFor(modelItem => item.CourseName)<br><span></span></div>
+            <div class="facebook-name">@Html.DisplayFor(modelItem => item.Hole)<br><span></span></div>
+
+        </div>
+        <div class="card-content">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Distance: @Html.DisplayFor(modelItem => item.distance)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="card-footer no-border">
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "button button-fill color-orange" })
+            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "button button-fill color-black" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "button button-fill color-red" })
+        </div>
+    </div>
+}

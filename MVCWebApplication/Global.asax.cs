@@ -16,6 +16,10 @@ namespace MVCWebApplication
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            // Register the global exception filter
+            GlobalFilters.Filters.Add(new GlobalExceptionFilter());
         }
+
     }
 }

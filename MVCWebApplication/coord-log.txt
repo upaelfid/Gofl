@@ -18,3 +18,13 @@ Jul 21 2021 10:7 Distance: 575.35yds
 Jul 21 2021 10:7 Distance: 311.68yds
 Jul 21 2021 10:18 Distance: 5088.79yds
 Jul 21 2021 10:19 Distance: 9104.19yds
+Apr 23 2024 10:34 Distance: 0.00yds
+Apr 23 2024 10:34 Distance: 0.00yds
+Apr 23 2024 10:39 Distance: 207.57yds
+Apr 23 2024 10:40 Distance: 207.57yds
+Apr 23 2024 10:40 Distance: 166.67yds
+Apr 23 2024 10:41 Distance: 198.16yds
+Apr 23 2024 10:43 Distance: 198.16yds
+Apr 23 2024 11:4 Distance: 203.63yds
+Apr 23 2024 11:5 Distance: 227.36yds
+May 14 2024 9:53 Distance: 26140.56yds

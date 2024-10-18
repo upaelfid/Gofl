@@ -32,11 +32,18 @@ namespace MVCWebApplication.Models
         public int h17 { get; set; }
         public int h18 { get; set; }
     }
-    //test
-    public class Drives
+
+    public class Drive
     {
-        public double lat { get; set; }
-        public double ln { get; set; }
+        public int Id { get; set; }
+        public string CourseName { get; set; }
+        public string Hole { get; set; }
+        public DateTime? dDate { get; set; }
+        public double teeLat { get; set; }
+        public double teeLn { get; set; }
+        public double driveLat { get; set; }
+        public double driveLn { get; set; }
+        public double distance { get; set; }
     }
 
     public class Course

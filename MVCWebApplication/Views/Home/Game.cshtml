@@ -1,10 +1,9 @@
 ﻿@model IEnumerable<MVCWebApplication.Models.Card>
 @{
-    ViewBag.Title = "Leaderboard";
+    ViewBag.Title = "Admin";
 }
-@Html.Partial("_Front9")
-<hr />
-@Html.Partial("_Back9")
-<hr />
-@Html.Partial("_Eighteen")
 
+
+@Html.ActionLink("DRIVES", "Index", "Drives", null, new { @class = "button button-fill color-orange" })
+<br />
+@Html.ActionLink("COURSE", "Index", "Course", null, new { @class = "button button-fill color-green" })

@@ -61,23 +61,32 @@ namespace MVCWebApplication.Controllers
         // GET: Course/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Course course = db.Courses.Find(id);
+            if (course == null)
+            {
+                return HttpNotFound();
+            }
+            return View(course);
         }
 
         // POST: Course/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,CourseName,h1lat,h1ln ,h2lat,h2ln ,h3lat,h3ln ,h4lat,h4ln ,h5lat,h5ln ,h6lat,h6ln ,h7lat,h7ln ,h8lat,h8ln ,h9lat,h9ln ,h10lat,h10ln ,h11lat,h11ln ,h12lat,h12ln ,h13lat,h13ln ,h14lat,h14ln ,h15lat,h15ln ,h16lat,h16ln ,h17lat,h17ln ,h18lat,h18ln ")] Course course)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(course).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(course);
         }
 
         // GET: Course/Delete/5

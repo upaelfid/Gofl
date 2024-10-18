@@ -30,7 +30,7 @@
                     <div id="text">initializing</div>
                     <div id="map"></div>
                     <div class="page-content">
-                        <div class="content-block-title"><img src="~/Content/page-start.png" /><br /><h1>@ViewBag.Title</h1></div>
+                        <div class="content-block-title">@*<img src="~/Content/page-start.png" />*@<br /><h1>@ViewBag.Title</h1></div>
                         <div class="content-block">
                             @RenderBody()
                         </div>
@@ -39,24 +39,60 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="toolbar tabbar tabbar-labels">
             <div class="end-page-margin">
-                <div class="end-page"><img src="~/Content/page-end.png" /></div></div>
-                <div class="toolbar-inner">
-                    <a href="@Url.Action("Index","Home")" class="tab-link"><i class="icon f7-icons">home</i><span class="tabbar-label">Home</span></a>
-                    <a href="@Url.Action("Game","Home")" class="tab-link"> <i class="icon f7-icons">graph_round</i><span class="tabbar-label">Leader Board</span></a>
-                    <a href="@Url.Action("Create","Cards")" class="tab-link"><i class="icon f7-icons">photos</i><span class="tabbar-label">New Card</span></a>
-                    <a href="@Url.Action("Index","Cards")" class="tab-link"><i class="icon f7-icons">favorites</i><span class="tabbar-label">Manage</span></a>
-                    @Html.Partial("_LoginPartial")
-                </div>
+                @*<div class="end-page"><img src="~/Content/page-end.png" /></div>*@
             </div>
+            <div class="toolbar-inner">
+                <a href="@Url.Action("Index","Home")" class="tab-link"><i class="icon f7-icons">home</i><span class="tabbar-label">Home</span></a>
+                <a href="@Url.Action("Game","Home")" class="tab-link"> <i class="icon f7-icons">graph_round</i><span class="tabbar-label">Admin</span></a>
+                <a href="@Url.Action("Create","Cards")" class="tab-link"><i class="icon f7-icons">photos</i><span class="tabbar-label">New Card</span></a>
+                <a href="@Url.Action("Index","Cards")" class="tab-link"><i class="icon f7-icons">favorites</i><span class="tabbar-label">Manage</span></a>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
     </div>
 
 
     @Scripts.Render("~/bundles/jquery")
 
     @Scripts.Render("~/bundles/bootstrap")
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Add the form submission logic
+  var scoreUpdateButton = document.getElementById('scoreUpdate');
+  if (scoreUpdateButton) {
+    scoreUpdateButton.addEventListener('click', function (e) {
+      e.preventDefault(); // Prevent the default form submission
+      var url = '@Url.Action("EditJson", "Cards")'; // Make sure this URL is correct
+      var formElement = document.getElementById('jsonSubmit');
+      var formData = new FormData(formElement);
+
+      fetch(url, {
+        method: 'POST',
+        body: formData
+      })
+      .then(function(response) {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(function(data) {
+        console.log('Form submitted successfully');
+        // Navigate to home page - adjust this to your Framework7 routing if needed
+        window.location.href = '@Url.Action("Index", "Home")';
+      })
+      .catch(function(error) {
+        console.error('Error submitting form:', error);
+        // Handle errors here
+      });
+    });
+  }
+});
+</script>
     @RenderSection("scripts", required: false)
     <script type="text/javascript" src="~/Scripts/compass.js"></script>
     <script>
@@ -73,10 +109,12 @@
                 var props = ['transform', 'webkitTransform', 'mozTransform',
                     'msTransform', 'oTransform'];
                 var node = byId(id);
+                if (!node) { } else {
                 for (var i = 0; i < props.length; i++) {
                     if (typeof (node.style[props[i]]) != 'undefined') {
                         node.style[props[i]] = commands;
                         break;
+                    }
                     }
                 }
             };
@@ -160,10 +198,22 @@
     <script>
         //hole coordinates
         var linkLoc = JSON.parse('@Html.Raw(@ViewBag.CourseCoords)');
-        var too = "";
+        var drivesData = JSON.parse('@Html.Raw(@ViewBag.Drives)');
         
-        $("#dis").click(function () {
+        var too = "";
+
+        //$("#dis").click(function () {
+        //    _askDeviceMotion();
+        //    if (navigator.geolocation) {
+        //        navigator.geolocation.getCurrentPosition(getDistanceToLink);
+        //    } else {
+        //        x.innerHTML = "Geolocation is not supported by this browser.";
+        //    }
+        //});
+
+        $(document).ready(function () {
             _askDeviceMotion();
+
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(getDistanceToLink);
             } else {
@@ -171,8 +221,131 @@
             }
         });
 
+            // Function to add markers for drives
+        // Function to add markers for drives
+        function addDriveMarkers(map) {
+            clearMarkers();
+
+            drivesData.forEach(function (drive) {
+                var markerIcon;
+                var currentHole = pin()[1];
+                // Determine the marker color based on the drive distance
+                if (drive.distance < 100) {
+                    markerIcon = {
+                        url: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+                    };
+                } else if (drive.distance >= 100 && drive.distance < 200) {
+                    markerIcon = {
+                        url: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
+                    };
+                } else {
+                    markerIcon = {
+                        url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                    };
+                }
+
+                var marker = new google.maps.Marker({
+                    position: { lat: drive.driveLat, lng: drive.driveLn },
+                    map: map,
+                    icon: markerIcon,
+                    title: 'Drive on ' + drive.dDate.toString()
+                });
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: 'Date: ' + drive.dDate.toString() + '<br>Distance: ' + drive.distance + ' yards'
+                });
+
+                marker.addListener('click', function () {
+                    infowindow.open(map, marker);
+                });
+                if (currentHole == drive.Hole) {
+                    markers.push(marker);
+                } 
+            });
+
+            // Refresh the map after adding markers
+            refreshMap(map);
+        }
+
+            // Array to store markers
+            var markers = [];
+
+            // Function to clear all markers from the map
+            function clearMarkers() {
+                markers.forEach(function (marker) {
+                    marker.setMap(null);
+                });
+                markers = [];
+            }
+
+            // Function to refresh the map
+            function refreshMap(map) {
+                // Get the current bounds of the map
+                var bounds = map.getBounds();
+
+                // Create a new instance of the map with the same options
+                var mapOptions = {
+                    zoom: map.getZoom(),
+                    center: map.getCenter(),
+                    mapTypeId: map.getMapTypeId(),
+                    mapTypeControl: false,
+                    fullscreenControl: false,
+                    streetViewControl: false,
+                    zoomControl: false,
+                };
+
+                // Create a new map instance
+                var newMap = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+                var compassControlDiv = document.createElement('div');
+                var compassControl = new CompassControl(compassControlDiv, map);
+                compassControlDiv.index = 1;
+                newMap.controls[google.maps.ControlPosition.TOP_CENTER].push(compassControlDiv);
+
+                // Add the markers to the new map
+                markers.forEach(function (marker) {
+                    marker.setMap(newMap);
+                });
+
+                // Replace the old map with the new map
+                map = newMap;
+            }
+
+
+            // Control to display drives
+            function DrivesControl(controlDiv) {
+                var controlUI = document.createElement('div');
+                controlUI.style.backgroundColor = '#fff';
+                controlUI.style.border = '2px solid #fff';
+                controlUI.style.borderRadius = '3px';
+                controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+                controlUI.style.cursor = 'pointer';
+                controlUI.style.marginBottom = '40px';
+                
+                controlUI.style.textAlign = 'center';
+                controlUI.title = 'Click to show drives';
+                controlDiv.appendChild(controlUI);
+
+                var controlText = document.createElement('div');
+                controlText.style.color = 'rgb(25,25,25)';
+                controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+                controlText.style.fontSize = '16px';
+                controlText.style.lineHeight = '38px';
+                controlText.style.paddingLeft = '5px';
+                controlText.style.paddingRight = '5px';
+                controlText.innerHTML = 'Show Drives';
+                controlUI.appendChild(controlText);
+
+                controlUI.addEventListener('click', function () {
+                    /*initMap(controlDiv.map);*/
+                    addDriveMarkers(controlDiv.map);
+                });
+            }
+
         //calculates distance between two points in km's
         function calcDistance(p1, p2) {
+            console.log(p1);
+            console.log(p2);
             return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(4);
         };
 
@@ -180,37 +353,43 @@
 
             // Set CSS for the control border.
             var controlUI = document.createElement('div');
-            controlUI.style.overflow = 'hidden';
-            controlUI.style.position = 'absolute';
-            controlUI.style.width = '25px';
-            controlUI.style.height = '25px';
+            controlUI.style.backgroundColor = '#fff';
+            controlUI.style.border = '2px solid #fff';
+            controlUI.style.borderRadius = '3px';
             controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
             controlUI.style.cursor = 'pointer';
-            controlUI.style.margin = '10px 14px';
+            controlUI.style.marginBottom = '40px';
+            controlUI.style.marginRight = '10px';
+
+
             controlUI.style.textAlign = 'center';
-            controlUI.title = 'Click to recenter the map';
+            controlUI.title = 'Click to show drives';
             controlDiv.appendChild(controlUI);
 
             // Set CSS for the control interior.
-            var controlText = document.createElement('img');
-            controlText.src = 'https://maps.gstatic.com/mapfiles/api-3/images/sv9.png'
-            controlText.style.position = 'absolute';
-            controlText.style.left = '-52px';
-            controlText.style.top = '-86px';
-            controlText.style.height = '175px';
-            controlText.style.width = '164px';
-            controlText.style.border = '0';
-            controlText.style.padding = '0';
-            controlText.style.margin = '0';
+            var controlText = document.createElement('div');
+            controlText.style.color = 'rgb(25,25,25)';
+            controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+            controlText.style.fontSize = '16px';
+            controlText.style.lineHeight = '38px';
+            controlText.style.paddingLeft = '5px';
+            controlText.style.paddingRight = '5px';
+            controlText.innerHTML = 'Distance';
             controlUI.appendChild(controlText);
 
             // iOS toggle full screen
             controlUI.addEventListener('click', function () {
-                $("#map").css({ "width": "0", "height": "0", "top": "42px", "margin-left": "0", "position": "fixed" });
+                    _askDeviceMotion();
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(getDistanceToPoint);
+                    } else {
+                        x.innerHTML = "Geolocation is not supported by this browser.";
+                    }
             });
 
         };
-
+        var marker1, marker2;
+        var poly;
         function CompassControl(compassDiv, map) {
 
             // Set CSS for the control border.
@@ -226,7 +405,7 @@
             controlUI.style.textAlign = 'center';
             controlUI.style.backgroundColor = 'black';
             controlUI.style.borderRadius = '18px';
-            controlUI.title = 'Click to recenter the map';
+            controlUI.title = 'Click to compass the map';
             compassDiv.appendChild(controlUI);
 
             // Set CSS for the control interior.
@@ -244,8 +423,7 @@
 
             // iOS toggle full screen
             controlUI.addEventListener('click', function () {
-
-                
+                _askDeviceMotion();
                 navigator.geolocation.getCurrentPosition(function (location) {
                     var pins = new pin();
                     var p2 = pins[0];
@@ -260,19 +438,20 @@
                     boundaries.extend(p1);
                     boundaries.extend(p2);
                     map.fitBounds(boundaries);
-                    $('div[tabindex=0]').attr('id', 'compass');
+                    /*$('div[tabindex=0]').attr('id', 'compass');*/
+                    $('div.gm-style').children().first().attr('id', 'compass');
                 });
                 //console.log(p1);
 
-                
 
-               
+
+
             });
 
         };
         var markerD, markerT;
         function DriveDistanceControl(distanceDiv, map) {
-            
+
             // Set CSS for the control border.
             var controlUI = document.createElement('div');
             controlUI.style.backgroundColor = '#fff';
@@ -289,74 +468,150 @@
             controlText.style.color = 'rgb(25,25,25)';
             controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
             controlText.style.marginTop = '10px';
-            controlText.style.lineHeight = '27px';
+            controlText.style.fontSize = '16px';
+            controlText.style.lineHeight = '38px';
             controlText.style.paddingLeft = '5px';
             controlText.style.paddingRight = '5px';
-            controlText.innerHTML = 'Drive';
+            controlText.innerHTML = 'Calculate Drive';
             controlUI.appendChild(controlText);
 
             //Show Drive Distance
             controlUI.addEventListener('click', function () {
-                var d = new Date();
-                var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-                var day = days[d.getDay()];
-                var hr = d.getHours();
-                var min = d.getMinutes();
-                var date = d.getDate();
-                var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                var month = months[d.getMonth()];
-                var year = d.getFullYear();
+
                 if (typeof markerT !== 'undefined' && typeof markerD !== 'undefined') {
                     $("#wor").parent('div').css({ "background-color": "black", "color": "white" });
                     $("#wor").css({ "color": "white", 'font-size': '.9em', 'left': '0' });
                     $("#distance").html((calcDistance(markerT.position, markerD.position) * 1093.61).toFixed(2) + " yds");
 
-                    $.ajax({
-                        url: '@Html.Raw(@Url.Action("Contact", "Home"))' + '?s=' + month + ' ' + date + ' ' + year + ' ' + hr + ':' + min + ' Distance: ' + (calcDistance(markerT.position, markerD.position) * 1093.61).toFixed(2) + 'yds',
-                        data: null,
-                        type: "post",
-                        dataType: JSON,
-                        contentType: "application/json; charset=utf-8",
-                        cache: false
-                    });
-                } else {
-                    $("#distance").parent('div').css({ "background-color": "black", "color": "white" });
-                    $("#distance").css({ "color": "white", 'font-size': '.9em', 'left': '0' });
-                    $("#distance").html("Set Your Markers");
-                }
-            });
+                var hole = pin()[1];
+                var driveData = {
+                    CourseName: linkLoc[0]["CourseName"],
+                    Hole: hole,
+                    dDate: new Date(), // Set the date as required
+                    teeLat: markerT.getPosition().lat(), // Set the latitude and longitude values
+                    teeLn: markerT.getPosition().lng(),
+                    driveLat: markerD.getPosition().lat(),
+                    driveLn: markerD.getPosition().lng(),
+                    distance: (calcDistance(markerT.position, markerD.position) * 1093.61).toFixed(2)
+                };
+
+                $.ajax({
+                    url: '@Url.Action("Create", "Drives")', // Replace with your action method URL
+                    data: JSON.stringify(driveData),
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    cache: false,
+                    success: function (response) {
+                        // Handle the successful response
+                        console.log(response);
+                         window.location.href = '@Url.Action("Index", "Home")';
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle the error
+                        console.log(error);
+                    }
+                });
+                    } else {
+                        $("#distance").parent('div').css({ "background-color": "black", "color": "white" });
+                        $("#distance").css({ "color": "white", 'font-size': '.9em', 'left': '0' });
+                        $("#distance").html("Set Your Markers");
+                    }
+                });
 
         }
 
+        function CardControl(cardDiv, map) {
+            // Set CSS for the control border.
+            var controlUI = document.createElement('div');
+            controlUI.style.backgroundColor = '#fff';
+            controlUI.style.borderRadius = '3px';
+            controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+            controlUI.style.cursor = 'pointer';
+            controlUI.style.marginTop = '10px';
+            controlUI.style.marginLeft = '10px';
+            controlUI.style.textAlign = 'center';
+            controlUI.title = 'Click to get your drives distance';
+            controlUI.zIndex = '99999';
+            cardDiv.appendChild(controlUI);
 
-                function TeeControl(teeDiv, map) {
+            // Set CSS for the control interior.
+            var controlText = document.createElement('div');
+            controlText.style.color = 'rgb(25,25,25)';
+            controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
             
+            controlText.style.fontSize = '16px';
+            controlText.style.lineHeight = '38px';
+            controlText.style.paddingLeft = '5px';
+            controlText.style.paddingRight = '5px';
+            controlText.innerHTML = 'Hide Card';
+            controlUI.appendChild(controlText);
+
+            // Toggle face-card visibility
+            var isVisible = true;
+            controlUI.addEventListener('click', function () {
+                var faceCard = document.querySelector('.page-content');
+                if (faceCard) {
+                    if (isVisible) {
+                        faceCard.style.display = 'none';
+                        faceCard.style.visibility = 'hidden';
+                        faceCard.style.lineHeight = '0';
+                        controlText.innerHTML = 'Show Card';
+                    } else {
+                        faceCard.style.display = 'block';
+                        faceCard.style.visibility = 'visible';
+                        faceCard.style.lineHeight = 'normal';
+                        controlText.innerHTML = 'Hide Card';
+                    }
+                    isVisible = !isVisible;
+                }
+            });
+        }
+
+
+        function TeeControl(teeDiv, map) {
             // Set CSS for the control border.
             var controlUI = document.createElement('div');
             controlUI.style.backgroundColor = '#fff';
             controlUI.style.borderRadius = '3px';
             controlUI.style.marginLeft = '15px';
-
             controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
             controlUI.style.cursor = 'pointer';
             controlUI.style.marginRight = '10px';
             controlUI.style.textAlign = 'center';
+
+            controlUI.style.alignItems = 'center'; // Add this line to vertically center the icon and text
+
+            // Add an icon to the custom control element
+            var customControlIcon = document.createElement('img');
+            customControlIcon.src = 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+            customControlIcon.alt = 'Custom Control Icon';
+            customControlIcon.style.padding = '5px';
+            controlUI.appendChild(customControlIcon); // Append the icon to the controlUI div
+
             teeDiv.appendChild(controlUI);
 
             // Set CSS for the control interior.
             var controlText = document.createElement('div');
             controlText.style.color = 'rgb(25,25,25)';
             controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-            controlText.style.marginTop = '10px';
-            controlText.style.lineHeight = '27px';
             controlText.style.paddingLeft = '5px';
             controlText.style.paddingRight = '5px';
-            controlText.innerHTML = 'Tee';
             controlUI.appendChild(controlText);
 
             //Show Tee Location
+            var isYellow = true; // Flag to track the color of the marker
                     controlUI.addEventListener('click', function () {
                         console.log('clicked');
+                        // Toggle the marker color
+                        if (isYellow) {
+                            customControlIcon.src = 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+                            isYellow = false;
+                        } else {
+                            customControlIcon.src = 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+                            isYellow = true;
+                        }
+
                         navigator.geolocation.getCurrentPosition(function (location) {
 
 
@@ -367,7 +622,8 @@
                                 markerT = new google.maps.Marker({
                                     draggable: true,
                                     position: new google.maps.LatLng(location.coords.latitude, location.coords.longitude),
-                                    map: map
+                                    map: map,
+                                    icon: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
                                 });
 
                             } else if (typeof markerT !== 'undefined' && typeof markerD === 'undefined') {
@@ -375,12 +631,13 @@
                                 markerD = new google.maps.Marker({
                                     draggable: true,
                                     position: new google.maps.LatLng(location.coords.latitude, location.coords.longitude),
-                                    map: map
+                                    map: map,
+                                    icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
                                 });
                             }
-                           
+
                         });
-                        
+
                     });
 
         }
@@ -527,9 +784,10 @@
                     return [p2, too];
                 };
         }
-        
-        function getDistanceToLink(position) {
-            
+
+        //have to create another function thats almost a duplicate of getDistanceToLink to enable distane
+        function getDistanceToPoint(position) {
+
             //show map variable
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 18,
@@ -544,33 +802,158 @@
             var centerControlDiv = document.createElement('div');
             var centerControl = new CenterControl(centerControlDiv, map);
             centerControlDiv.index = 1;
-            map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
+            map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(centerControlDiv);
+
+
+            var drivesControlDiv = document.createElement('div');
+            var drivesControl = new DrivesControl(drivesControlDiv);
+            drivesControlDiv.map = map; // Store the map instance in the controlDiv
+            drivesControlDiv.index = 2;
+            map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(drivesControlDiv);
 
             // Create the DIV to hold the control and call the CenterControl()
             // constructor passing in this DIV.
             var compassControlDiv = document.createElement('div');
             var compassControl = new CompassControl(compassControlDiv, map);
-            compassControlDiv.index = 1;
+            compassControlDiv.index = 3;
             map.controls[google.maps.ControlPosition.TOP_CENTER].push(compassControlDiv);
 
             // Create the DIV to hold the control and call the CenterControl()
             // constructor passing in this DIV.
             var distanceControlDiv = document.createElement('div');
             var distanceControl = new DriveDistanceControl(distanceControlDiv, map);
-            distanceControlDiv.index = 1;
+            distanceControlDiv.index = 4;
             map.controls[google.maps.ControlPosition.TOP_RIGHT].push(distanceControlDiv);
 
 
             var teeControlDiv = document.createElement('div');
             var teeControl = new TeeControl(teeControlDiv, map);
-            teeControlDiv.index = 1;
+            teeControlDiv.index = 5;
             map.controls[google.maps.ControlPosition.LEFT_CENTER].push(teeControlDiv);
 
+
+            // Create the DIV to hold the control and call the CenterControl()
+            // constructor passing in this DIV.
+            var cardControlDiv = document.createElement('div');
+            var cardControl = new CardControl(cardControlDiv, map);
+            cardControlDiv.index = 6;
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(cardControlDiv);
+
+            //START//
+            //This measures the distance to any place from the current location.
+            navigator.geolocation.getCurrentPosition(function (location) {
+                marker1 = new google.maps.Marker({
+                    icon: new google.maps.MarkerImage('https://maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+                        new google.maps.Size(22, 22),
+                        new google.maps.Point(0, 18),
+                        new google.maps.Point(11, 11)),
+                    position: { lat: position.coords.latitude, lng: position.coords.longitude },
+                    draggable: true,
+                    map: map
+                });
+
+                marker2 = new google.maps.Marker({
+                    map: map,
+                    draggable: true,
+                    position: { lat: position.coords.latitude, lng: position.coords.longitude },
+                });
+
+                var bounds = new google.maps.LatLngBounds(
+                    marker1.getPosition(), marker2.getPosition());
+                map.fitBounds(bounds);
+
+                google.maps.event.addListener(marker1, 'position_changed', update);
+                google.maps.event.addListener(marker2, 'position_changed', update);
+                var lineSymbol = {
+                    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                    scale: 2
+                };
+                poly = new google.maps.Polyline({
+                    icons: [{ icon: lineSymbol }],
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 3,
+                    map: map,
+                });
+                update();
+
+            });
+
+            const infoWindow = new google.maps.InfoWindow();
+            function update() {
+                infoWindow.setContent(`<div id="distanceFt">Your Location</div>`);
+                // Open the info window immediately
+                infoWindow.open(map, marker2);
+                var path = [marker1.getPosition(), marker2.getPosition()];
+                poly.setPath(path);
+                $("#distanceFt").css({ "color": "black", 'font-size': '3em', 'left': '0' });
+                $("#distanceFt").html((calcDistance(path[0], path[1]) * 1093.61).toFixed(2) + " yds");
+            }
+            //END//
+
+            $("#map").css({ "width": "100%", "height": "83%", "margin-left": "0", "margin-top": "26px", "position": "absolute" });
+            $(".page-content").css({ "height": "unset !important", "padding-top": "0", "padding-bottom": "0", "top": "100px" });
+
+        };
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        function getDistanceToLink(position) {
+
+            //show map variable
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 18,
+                mapTypeId: google.maps.MapTypeId.SATELLITE,
+                mapTypeControl: false,
+                fullscreenControl: false,
+                streetViewControl: false,
+                zoomControl: false,
+            });
+            // Create the DIV to hold the control and call the CenterControl()
+            // constructor passing in this DIV.
+            var centerControlDiv = document.createElement('div');
+            var centerControl = new CenterControl(centerControlDiv, map);
+            centerControlDiv.index = 1;
+            map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(centerControlDiv);
+
+
+            var drivesControlDiv = document.createElement('div');
+            var drivesControl = new DrivesControl(drivesControlDiv);
+            drivesControlDiv.map = map; // Store the map instance in the controlDiv
+            drivesControlDiv.index = 2;
+            map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(drivesControlDiv);
+
+            // Create the DIV to hold the control and call the CenterControl()
+            // constructor passing in this DIV.
+            var compassControlDiv = document.createElement('div');
+            var compassControl = new CompassControl(compassControlDiv, map);
+            compassControlDiv.index = 3;
+            map.controls[google.maps.ControlPosition.TOP_CENTER].push(compassControlDiv);
+
+            // Create the DIV to hold the control and call the CenterControl()
+            // constructor passing in this DIV.
+            var distanceControlDiv = document.createElement('div');
+            var distanceControl = new DriveDistanceControl(distanceControlDiv, map);
+            distanceControlDiv.index = 4;
+            map.controls[google.maps.ControlPosition.TOP_RIGHT].push(distanceControlDiv);
+
+
+            var teeControlDiv = document.createElement('div');
+            var teeControl = new TeeControl(teeControlDiv, map);
+            teeControlDiv.index = 5;
+            map.controls[google.maps.ControlPosition.LEFT_CENTER].push(teeControlDiv);
+
+
+            // Create the DIV to hold the control and call the CenterControl()
+            // constructor passing in this DIV.
+            var cardControlDiv = document.createElement('div');
+            var cardControl = new CardControl(cardControlDiv, map);
+            cardControlDiv.index = 6;
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(cardControlDiv);
+
+
+            //Calculate distance from current location to the flag
             var pins = new pin();
             var p2 = pins[0];
             var too = pins[1];
-
-
 
             function onSuccess(position) {
 
@@ -580,7 +963,7 @@
 
                 $("#distance").parent('div').css({ "background-color": "black", "color": "white" });
                 $("#distance").css({ "color": "white", 'font-size': '1.3em', 'left': '0' });
-                $("#distance").html((calcDistance(p1, p2) * 1093.61).toFixed(2) + " yd to " + too);               
+                $("#distance").html((calcDistance(p1, p2) * 1093.61).toFixed(2) + " yd to " + too);
             }
 
             // onError Callback receives a PositionError object
@@ -593,43 +976,20 @@
             navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000, enableHighAccuracy: true });
             map.setCenter(p2);
 
-            //map.addListener('click', function (e) {
-            //    placeMarker(e.latLng, map);
-            //});
-
-            function placeMarker(position, map) {
-                if (typeof markerT === 'undefined' && typeof markerD === 'undefined') {
-
-                     markerT = new google.maps.Marker({
-                        draggable: true,
-                        position: position,
-                        map: map
-                    });
-                    map.panTo(position);
-                } else if (typeof markerT !== 'undefined' && typeof markerD === 'undefined') {
-
-                     markerD = new google.maps.Marker({
-                        draggable: true,
-                        position: position,
-                        map: map
-                     });
-                }
-            }
+            $("#map").css({ "width": "100%", "height": "83%", "margin-left": "0", "margin-top": "26px", "position": "absolute" });
+            $(".page-content").css({ "height": "unset !important", "padding-top": "0", "padding-bottom": "0", "top":"100px" });
 
 
-            $("#map").css({ "width": "100%", "height": "83%", "margin-left": "0", "margin-top": "26px", "position": "fixed" });
-           
-            // Creating a marker and positioning it on the map  
+            // Creating a marker and positioning it on the map
             var marker = new google.maps.Marker({
                 position: p2,
                 icon: new google.maps.MarkerImage('/Content/flag2.png'),
                 animation: google.maps.Animation.DROP,
                 map: map
             });
-
-            
-
         };
+
+
         //For iphone standalone app
         if (("standalone" in window.navigator) && window.navigator.standalone) {
             var noddy, remotes = false;

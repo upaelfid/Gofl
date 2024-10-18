@@ -1,0 +1,74 @@
+﻿@model MVCWebApplication.Models.Drive
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Drive</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CourseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CourseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.teeLat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.teeLat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.teeLn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.teeLn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.driveLat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.driveLat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.driveLn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.driveLn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.distance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.distance)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

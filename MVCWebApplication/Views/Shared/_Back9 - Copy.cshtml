@@ -4,22 +4,13 @@
     ViewBag.Date = String.Format("{0:MMMM} {0:dd} {0:yyyy}", @DateTime.Now);
     var cards = JsonConvert.DeserializeObject<List<MVCWebApplication.Models.Card>>(ViewBag.Score);
     var mincards = JsonConvert.DeserializeObject<List<MVCWebApplication.Models.Card>>(ViewBag.minCard);
-
 }
 
 @foreach (var item in Model)
 {
-    
-        // Create an array to store the values of the holes (h1, h2, ..., h18)
-        int[] holeValues = new int[] { item.h1, item.h2, item.h3, item.h4, item.h5, item.h6, item.h7, item.h8, item.h9, item.h10, item.h11, item.h12, item.h13, item.h14, item.h15, item.h16, item.h17, item.h18 };
-
-        // Find the first unfilled hole (i.e., the first hole with a value of 0)
-        int firstUnfilledHoleIndex = Array.FindIndex(holeValues, h => h == 0);
-    
 
     if (item.ccID == 2)
     {
-        
         <div class="card facebook-card back9">
             <div class="card-header no-border">
                 <div class="facebook-avatar">
@@ -316,170 +307,12 @@
                     </tr>
 
                 </table>
-                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "jsonSubmit" }))
-
-                {
-                @Html.AntiForgeryToken()
-                @Html.Hidden("Id", item.Id)
-
-                if (firstUnfilledHoleIndex == 0)
-                {
-
-                <div class="card-content">
-                    <input name="h1" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field must be a number." value="" autofocus="autofocus"></input>
-                </div>
-                }
-
-                else if (firstUnfilledHoleIndex == 1)
-                {
-
-                <div class="card-content">
-                    <input name="h2" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field must be a number." value="" autofocus="autofocus"></input>
-
-                </div>
-                }
-
-                else if (firstUnfilledHoleIndex == 2)
-                {
-
-                <div class="card-content">
-                    <input name="h3" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field must be a number." value="" autofocus="autofocus"></input>
-                </div>
-                }
-                else if (firstUnfilledHoleIndex == 3)
-                {
-
-                <div class="card-content">
-                    <input name="h4" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field must be a number." value="" autofocus="autofocus"></input>
-                </div>
-                }
-                else if (firstUnfilledHoleIndex == 4)
-                {
-
-                <div class="card-content">
-                    <input name="h5" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field h3 must be a number." value="" autofocus="autofocus"></input>
-                </div>
-                }
-                else if (firstUnfilledHoleIndex == 5)
-                {
-
-                <div class="card-content">
-                    <input name="h6" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field must be a number." value="" autofocus="autofocus"></input>
-                </div>
-                }
-                else if (firstUnfilledHoleIndex == 6)
-                {
-
-                <div class="card-content">
-                    <input name="h7" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field must be a number." value="" autofocus="autofocus"></input>
-                </div>
-                }
-                else if (firstUnfilledHoleIndex == 7)
-                {
-
-                <div class="card-content">
-                    <input name="h8" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field must be a number." value="" autofocus="autofocus"></input>
-                </div>
-                }
-                else if (firstUnfilledHoleIndex == 8)
-                {
-
-                <div class="card-content">
-                    <input name="h9" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field must be a number." value="" autofocus="autofocus"></input>
-                </div>
-                }
-                else if (firstUnfilledHoleIndex == 9)
-                {
-
-                <div class="card-content">
-                    <input name="h10" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field must be a number." value="" autofocus="autofocus"></input>
-                </div>
-                }
-                else if (firstUnfilledHoleIndex == 10)
-                {
-
-                <div class="card-content">
-                    <input name="h11" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field must be a number." value="" autofocus="autofocus"></input>
-                </div>
-                }
-                else if (firstUnfilledHoleIndex == 11)
-                {
-
-                <div class="card-content">
-                    <input name="h12" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field must be a number." value="" autofocus="autofocus"></input>
-                </div>
-                }
-                else if (firstUnfilledHoleIndex == 12)
-                {
-
-                <div class="card-content">
-                    <input name="h13" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field must be a number." value="" autofocus="autofocus"></input>
-                </div>
-                }
-                else if (firstUnfilledHoleIndex == 13)
-                {
-
-                <div class="card-content">
-                    <input name="h14" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field must be a number." value="" autofocus="autofocus"></input>
-                </div>
-                }
-                else if (firstUnfilledHoleIndex == 14)
-                {
-
-                <div class="card-content">
-                    <input name="h15" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field must be a number." value="" autofocus="autofocus"></input>
-                </div>
-                }
-                else if (firstUnfilledHoleIndex == 15)
-                {
-
-                <div class="card-content">
-                    <input name="h16" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field must be a number." value="" autofocus="autofocus"></input>
-                </div>
-                }
-                else if (firstUnfilledHoleIndex == 16)
-                {
-
-                <div class="card-content">
-                    <input name="h17" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field must be a number." value="" autofocus="autofocus"></input>
-                </div>
-                }
-                else if (firstUnfilledHoleIndex == 17)
-                {
-
-                <div class="card-content">
-                    <input name="h18" class="text-box single-line" id="h1Submit" type="tel" data-val-required="The field is required."
-                           data-val="true" data-val-number="The field must be a number." value="" autofocus="autofocus"></input>
-                </div>
-                }
-
-
-                }
             </div>
             <div class="card-footer no-border">
                 @if (User.Identity.Name == item.Name && item.h9 == 0)
                 {
-                    
-                    <a href="#" id="scoreUpdate" class="button button button-fill color-orange">UPDATE</a>
-                    @*<a href="#" id="dis" class="button button-fill color-black">DISTANCE</a>*@
-
+                    @Html.ActionLink("UPDATE", "Edit", "Cards", new { id = item.Id }, new { @class = "button button-fill color-orange" })
+                    <a href="#" id="dis" class="button button-fill color-black">DISTANCE</a>
                 }
                 else
                 {
@@ -737,3 +570,4 @@
     }
 
 }
+

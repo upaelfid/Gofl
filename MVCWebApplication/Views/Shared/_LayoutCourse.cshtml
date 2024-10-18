@@ -1,0 +1,63 @@
+﻿<html class="pixel-ratio-2 retina watch-active-state">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="~/Content/mestekg.png" />
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?v=3&key=AIzaSyCoMhrPfyUXUI0T6C28DFskxwOrAegtlYs&libraries=geometry"></script>
+    <title>Shaker Golf</title>
+
+    @Styles.Render("~/Content/css")
+
+</head>
+
+<body class="framework7-root">
+    <div class="views tabs toolbar-through">
+        <div id="view-1" class="view view-main tab active">
+            <div class="navbar">
+                <div class="navbar-inner navbar-on-center">
+                    <div class="center sliding" id="distance"> Super Golf League 2</div>
+                    <div class="right contact-edit-link">
+
+                    </div>
+                </div>
+            </div>
+            <div class="pages navbar-through toolbar-through">
+                <div data-page="index-1" class="page">
+                    <div id="text">initializing</div>
+                    <div id="map"></div>
+                    <div class="page-content">
+                        <div class="content-block-title"><img src="~/Content/page-start.png" /><br /><h1>@ViewBag.Title</h1></div>
+                        <div class="content-block">
+                            @RenderBody()
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="toolbar tabbar tabbar-labels">
+            <div class="end-page-margin">
+                <div class="end-page"><img src="~/Content/page-end.png" /></div>
+            </div>
+            <div class="toolbar-inner">
+                <a href="@Url.Action("Index","Home")" class="tab-link"><i class="icon f7-icons">home</i><span class="tabbar-label">Home</span></a>
+                <a href="@Url.Action("Game","Home")" class="tab-link"> <i class="icon f7-icons">graph_round</i><span class="tabbar-label">Leader Board</span></a>
+                <a href="@Url.Action("Create","Cards")" class="tab-link"><i class="icon f7-icons">photos</i><span class="tabbar-label">New Card</span></a>
+                <a href="@Url.Action("Index","Cards")" class="tab-link"><i class="icon f7-icons">favorites</i><span class="tabbar-label">Manage</span></a>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

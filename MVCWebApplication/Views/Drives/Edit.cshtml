@@ -1,0 +1,72 @@
+﻿@model MVCWebApplication.Models.Drive
+
+@{
+    ViewBag.Title = Model.CourseName;
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="card facebook-card" id="course">
+        <div class="card-header no-border">
+
+            <div class="facebook-name">@Html.EditorFor(model => model.CourseName, new { htmlAttributes = new { @class = "form-control" } })<br><span></span></div>
+            <div class="facebook-name"><br><span></span></div>
+
+        </div>
+        <div class="card-content">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label for="Hole">Hole</label>
+                            @Html.EditorFor(model => model.Hole, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                        <td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="dDate">Date</label>
+                            @Html.EditorFor(model => model.dDate, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                        <td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="tee">Tee Lat Lng</label>
+                            @Html.EditorFor(model => model.teeLat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.teeLn, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                        <td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="drive">Drive Lat Lng</label>
+                            @Html.EditorFor(model => model.driveLat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.driveLn, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                        <td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="distance">Distance</label>
+                            @Html.EditorFor(model => model.distance, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="card-footer no-border">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="button button-fill color-blue" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

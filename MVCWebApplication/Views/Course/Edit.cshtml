@@ -1,0 +1,94 @@
+﻿@model MVCWebApplication.Models.Course
+
+@{
+    ViewBag.Title = Model.CourseName;
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="card facebook-card" id="course">
+        <div class="card-header no-border">
+
+            <div class="facebook-name">@Html.EditorFor(model => model.CourseName, new { htmlAttributes = new { @class = "form-control" } })<br><span></span></div>
+            <div class="facebook-name"><br><span></span></div>
+
+        </div>
+        <div class="card-content">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label for="username">Lat Lng 1</label>
+                            @Html.EditorFor(model => model.h1lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h1ln, new { htmlAttributes = new { @class = "form-control" } })<br />
+                            <label for="username">Lat Lng 2</label>
+                            @Html.EditorFor(model => model.h2lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h2ln, new { htmlAttributes = new { @class = "form-control" } })<br />
+                            <label for="username">Lat Lng 3</label>
+                            @Html.EditorFor(model => model.h3lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h3ln, new { htmlAttributes = new { @class = "form-control" } })<br />
+                            <label for="username">Lat Lng 4</label>
+                            @Html.EditorFor(model => model.h4lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h4ln, new { htmlAttributes = new { @class = "form-control" } })<br />
+                            <label for="username">Lat Lng 5</label>
+                            @Html.EditorFor(model => model.h5lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h5ln, new { htmlAttributes = new { @class = "form-control" } })<br />
+                            <label for="username">Lat Lng 6</label>
+                            @Html.EditorFor(model => model.h6lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h6ln, new { htmlAttributes = new { @class = "form-control" } })<br />
+                            <label for="username">Lat Lng 7</label>
+                            @Html.EditorFor(model => model.h7lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h7ln, new { htmlAttributes = new { @class = "form-control" } })<br />
+                            <label for="username">Lat Lng 8</label>
+                            @Html.EditorFor(model => model.h8lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h8ln, new { htmlAttributes = new { @class = "form-control" } })<br />
+                            <label for="username">Lat Lng 9</label>
+                            @Html.EditorFor(model => model.h9lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h9ln, new { htmlAttributes = new { @class = "form-control" } })<br />
+                            <label for="username">Lat Lng 10</label>
+                            @Html.EditorFor(model => model.h10lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h10ln, new { htmlAttributes = new { @class = "form-control" } })<br />
+                            <label for="username">Lat Lng 11</label>
+                            @Html.EditorFor(model => model.h11lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h11ln, new { htmlAttributes = new { @class = "form-control" } })<br />
+                            <label for="username">Lat Lng 12</label>
+                            @Html.EditorFor(model => model.h12lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h12ln, new { htmlAttributes = new { @class = "form-control" } })<br />
+                            <label for="username">Lat Lng 13</label>
+                            @Html.EditorFor(model => model.h13lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h13ln, new { htmlAttributes = new { @class = "form-control" } })<br />
+                            <label for="username">Lat Lng 14</label>
+                            @Html.EditorFor(model => model.h14lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h14ln, new { htmlAttributes = new { @class = "form-control" } })<br />
+                            <label for="username">Lat Lng 15</label>
+                            @Html.EditorFor(model => model.h15lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h15ln, new { htmlAttributes = new { @class = "form-control" } })<br />
+                            <label for="username">Lat Lng 16</label>
+                            @Html.EditorFor(model => model.h16lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h16ln, new { htmlAttributes = new { @class = "form-control" } })<br />
+                            <label for="username">Lat Lng 17</label>
+                            @Html.EditorFor(model => model.h17lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h17ln, new { htmlAttributes = new { @class = "form-control" } })<br />
+                            <label for="username">Lat Lng 18</label>
+                            @Html.EditorFor(model => model.h18lat, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.h18ln, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="card-footer no-border">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="button button-fill color-blue" />
+        </div>
+    </div>
+</div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

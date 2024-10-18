@@ -138,6 +138,57 @@ namespace MVCWebApplication.Controllers
             return View(card);
         }
 
+        // POST: Cards/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult EditJson([Bind(Include = "Id,ccID,Name,CourseName,Team,gDate,h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18")] Card card)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    Card dbCardObject = new Card { Id = card.Id };
+                    db.Cards.Attach(dbCardObject);
+                    dbCardObject.Name = card.Name;
+                    dbCardObject.CourseName = card.CourseName;
+                    dbCardObject.Team = card.Team;
+                    dbCardObject.ccID = card.ccID;
+                    dbCardObject.h1 = card.h1;
+                    dbCardObject.h2 = card.h2;
+                    dbCardObject.h3 = card.h3;
+                    dbCardObject.h4 = card.h4;
+                    dbCardObject.h5 = card.h5;
+                    dbCardObject.h6 = card.h6;
+                    dbCardObject.h7 = card.h7;
+                    dbCardObject.h8 = card.h8;
+                    dbCardObject.h9 = card.h9;
+                    dbCardObject.h10 = card.h10;
+                    dbCardObject.h11 = card.h11;
+                    dbCardObject.h12 = card.h12;
+                    dbCardObject.h13 = card.h13;
+                    dbCardObject.h14 = card.h14;
+                    dbCardObject.h15 = card.h15;
+                    dbCardObject.h16 = card.h16;
+                    dbCardObject.h17 = card.h17;
+                    dbCardObject.h18 = card.h18;
+                    dbCardObject.gDate = card.gDate;
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Card updated successfully", card = dbCardObject });
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { success = false, message = "Error updating card: " + ex.Message });
+                }
+            }
+            else
+            {
+                return Json(new { success = false, message = "Invalid model state", errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
+            }
+        }
+
         // POST: Cards/EditCard/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
